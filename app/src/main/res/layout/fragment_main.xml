@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.zys.jym.lanhu.view.NoScrollViewPager
+        android:id="@+id/vp_content"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/white" />
+    <RadioGroup
+        android:id="@+id/rg_main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="#cccccc"
+        android:paddingTop="0.5dp"
+        android:gravity="bottom"
+        android:orientation="horizontal"
+        android:weightSum="4">
+        <RadioButton
+            android:id="@+id/rb_group"
+            style="@style/fragment_content_rb_style"
+            android:drawableTop="@drawable/rb_tap_group_selector"
+            android:text="首页" />
+        <RadioButton
+            android:id="@+id/rb_release"
+            style="@style/fragment_content_rb_style"
+            android:drawableTop="@drawable/rb_tap_release_selector"
+            android:text="发布" />
+        <RadioButton
+            android:id="@+id/rb_top"
+            style="@style/fragment_content_rb_style"
+            android:drawableTop="@drawable/rb_tap_top_selector"
+            android:text="置顶" />
+        <RadioButton
+            android:id="@+id/rb_mine"
+            style="@style/fragment_content_rb_style"
+            android:drawableTop="@drawable/rb_tap_mine_selector"
+            android:text="我的" />
+    </RadioGroup>
+
+</LinearLayout>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="colorPrimary">#393A3E</color>
+
+    <color name="colorPrimaryDark">#393A3E</color>
+
+    <color name="colorAccent">#393A3E</color>
+
+    <!-- APP的综合的主题颜色-->
+
+    <color name="main_color">#19AD17</color>
+    <color name="toolbar_color">#393A3E</color>
+    <color name="bg_color">#F9F9FB</color>
+    <color name="money_color">#AB1001</color>
+
+    <color name="white">#ffffff</color>
+
+    <color name="black">#000</color>
+
+    <color name="text_back_gray">#666666</color>
+
+    <color name="gray">#808080</color>
+
+    <color name="gray_progress_bar">#11808080</color>
+
+    <color name="gray_white">#F2F2F2</color>
+
+    <color name="home_font">#9D6F36</color>
+
+    <color name="view_line_color">#9D6F36</color>
+
+    <color name="blue">#0000ff</color>
+
+    <color name="red">#ff0000</color>
+
+    <color name="btn_no_verification">#CCCCCC</color>
+
+
+
+    <color name="font_red">#EC5051</color>
+
+    <color name="green">#108747</color>
+
+    <color name="backcolor">#10E5C9</color>
+
+    <color name="teal">#008080</color>
+
+    <color name="softgreen">#40E0D0</color>
+
+    <color name="tealtransparent">#88008080</color>
+
+    <color name="blueviolet">#8a2be2</color>
+
+    <color name="material_blue_500">#5677fc</color>
+
+    <color name="ripple">#F06292</color>
+
+    <color name="accent">#E91E63</color>
+
+    <color name="accent_pressed">#C2185B</color>
+
+    <color name="xxx">#6495ED</color>
+
+    <color name="cancel">#5BC3FE</color>
+    <color name="buy_vip_p">#FF0000</color>
+    <color name="buy_vip_n">#EEEEEE</color>
+    <color name="navpage">#FFE1E8EB</color>
+    <color name="tm">#00000000</color>
+</resources>

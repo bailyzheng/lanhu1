@@ -1,0 +1,89 @@
+*{
+	padding: 0;
+	margin: 0;
+}
+html,body{
+	font-size: 10px;
+}
+.wrap_content{
+	position:relative;
+	left: 0rem;
+	top: 0rem;
+	width: 95%;
+	height: 100%;
+	background: url(../img/bg.png) repeat;
+	padding-left: 1rem;
+	padding-top: 1rem;
+}
+.title1{
+	background: url(../img/使用蓝狐交友神器@2x.png) no-repeat;
+	background-size: 100% 100%;
+	width: 16rem;
+	height: 2.35rem;
+}
+.title1 p,.title1_1 p,.title2 p,.title3 p,.title2_1 p,.title4 p{
+	color: #FFFFFF;
+	padding-left: 0.5rem;
+	font-size: 1.2rem;
+}
+.title1 p,.title2 p,.title3 p,.title4 p{
+	padding-top: 0.5rem;
+}
+.title1_1{
+	background: url(../img/橙色底2@2x.png) no-repeat;
+	background-size: 100% 100%;
+	width: 8rem;
+	height: 1.8rem;
+	margin-top: 1.2rem;
+	margin-bottom: 0.5rem;
+}
+.title1_1_content p{
+	color: #454545;
+	font-size: 1.2rem;
+	padding-top: 0.5rem;
+}
+
+.title2{
+	background: url(../img/准备工作@2x.png) no-repeat;
+	background-size: 100% 100%;
+	width: 12rem;
+	height: 2.35rem;
+	margin-top: 1.2rem;
+	margin-bottom: 1rem;
+}
+.title2_content p{
+	color: #333333;
+	font-size: 1.2rem;
+	padding-top: 0.5rem;
+}
+.title3{
+	background: url(../img/功能介绍@2x.png) no-repeat;
+	background-size: 100% 100%;
+	width: 18rem;
+	height: 2.35rem;
+	margin-top: 1.2rem;
+	margin-bottom: 1rem;
+}
+.title2_1{
+	background: url(../img/橙色底1@2x.png) no-repeat;
+	background-size: 100% 100%;
+	width: 6rem;
+	height: 1.8rem;
+	margin-top: 1.2rem;
+	margin-bottom: 0.5rem;
+}
+.title4{
+	background: url(../img/常见问题@2x.png) no-repeat;
+	background-size: 100% 100%;
+	width: 15rem;
+	height: 2.35rem;
+	margin-top: 1.2rem;
+	margin-bottom: 1rem;
+}
+.title4_content span{
+	color: #CE3C39;
+	font-size: 1.2rem;
+}
+.title4_p{
+	margin-bottom: 3rem;
+}

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:gravity="center"
+    android:id="@+id/pop_linear"
+    android:background="#a5000000"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="240dp"
+        android:minHeight="140dp"
+        android:background="@drawable/pop_window_bg"
+        android:orientation="vertical"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="2"
+            android:layout_height="0dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:text="温馨提示"
+                android:textSize="18sp"
+                android:textColor="#000000"
+                android:gravity="bottom|center_horizontal"
+                android:layout_height="40dp" />
+            <TextView
+                android:id="@+id/tv_howto_add"
+                android:layout_width="match_parent"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:gravity="center_horizontal"
+                android:paddingTop="10dp"
+                android:textSize="13sp"
+                android:text=""
+                android:paddingBottom="10dp"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="#B8B8B8"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="40dp">
+            <TextView
+                android:id="@+id/pop_window_cancle"
+                android:layout_width="0dp"
+                android:text="取消"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textSize="16sp"
+                android:textColor="@color/main_color"
+                android:layout_height="40dp" />
+            <View
+                android:layout_width="0.5dp"
+                android:background="#B8B8B8"
+                android:layout_height="match_parent"
+                />
+            <TextView
+                android:id="@+id/pop_window_sure"
+                android:layout_width="0dp"
+                android:text="确定"
+                android:textSize="16sp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textColor="@color/main_color"
+                android:layout_height="40dp" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

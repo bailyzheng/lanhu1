@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/index_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/toolbar_color"
+        android:minHeight="?attr/actionBarSize"
+        android:visibility="visible">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="修改资料"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+    </android.support.v7.widget.Toolbar>
+
+    <RelativeLayout
+        android:id="@+id/rl_modifydata"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:layout_marginTop="15dp"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="上传头像"
+            android:layout_marginLeft="15dp"
+            android:layout_centerVertical="true"
+            android:textColor="@color/black"
+            android:textSize="16sp"/>
+        <com.zys.jym.lanhu.view.CircleImageView
+            android:id="@+id/iv_head"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:src="@mipmap/icon_head_normal"
+            android:layout_toLeftOf="@+id/tv_right"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            app:civ_border_color="@color/white"
+            android:layout_marginRight="5dp"
+            app:civ_border_width="0dp"
+            />
+        <TextView
+            android:id="@+id/tv_right"
+            android:drawablePadding="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="15dp"
+            android:drawableRight="@mipmap/icon_enter"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_nickname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:layout_marginTop="15dp"
+        android:padding="15dp"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="修改昵称"
+            android:layout_centerVertical="true"
+            android:textColor="@color/black"
+            android:textSize="16sp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:drawableRight="@mipmap/icon_enter"
+            />
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/rl_describe"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:layout_marginTop="1dp"
+        android:padding="15dp"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="修改描述"
+            android:layout_centerVertical="true"
+            android:textColor="@color/black"
+            android:textSize="16sp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:drawableRight="@mipmap/icon_enter"
+            />
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/rl_pwd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:layout_marginTop="1dp"
+        android:padding="15dp"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="修改密码"
+            android:layout_centerVertical="true"
+            android:textColor="@color/black"
+            android:textSize="16sp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:drawableRight="@mipmap/icon_enter"
+            />
+
+    </RelativeLayout>
+</LinearLayout>

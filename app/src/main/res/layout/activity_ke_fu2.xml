@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_ke_fu2"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.zys.jym.lanhu.activity.KeFu2Activity">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/index_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/toolbar_color"
+        android:minHeight="?attr/actionBarSize"
+        android:visibility="visible">
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="蓝狐客服"
+            android:textColor="@color/white"
+            android:textSize="17sp" />
+    </android.support.v7.widget.Toolbar>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@mipmap/backgroud">
+        <TextView
+            android:id="@+id/tv_kefu_zy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@mipmap/pink"
+            android:gravity="center"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/white"
+            android:layout_above="@+id/tv_kefu_hyf"
+            android:layout_marginBottom="@dimen/dimen_10"
+            android:text="点击 客服丿中阳"/>
+        <TextView
+            android:id="@+id/tv_kefu_hyf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@mipmap/blue"
+            android:gravity="center"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/white"
+            android:layout_marginBottom="@dimen/dimen_10"
+            android:text="点击 客服丿狐一菲"/>
+    </RelativeLayout>
+
+
+</LinearLayout>

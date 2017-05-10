@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F9F9FB"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/index_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/toolbar_color"
+        android:minHeight="?attr/actionBarSize"
+        android:visibility="visible">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_home_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="--"
+                android:textColor="@color/white"
+                android:textSize="14sp"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="5dp"
+                android:layout_toRightOf="@+id/tv_home_location"
+                android:src="@drawable/ic_sanjiao" />
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="蓝狐微商"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/iv_home_im"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="15dp"
+                android:text="新手必看"
+                android:textColor="@color/white"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:textSize="14sp"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="15dp" />
+        </RelativeLayout>
+
+
+    </android.support.v7.widget.Toolbar>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.design.widget.CoordinatorLayout
+            android:id="@+id/coordinatorlayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <android.support.design.widget.AppBarLayout
+                android:id="@+id/appbarlayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/bg_color"
+                android:fitsSystemWindows="true"
+                android:orientation="vertical">
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="75dp"
+                    android:orientation="horizontal"
+                    android:background="@color/gray_white"
+                    app:layout_scrollFlags="scroll|enterAlways">
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:gravity="center_vertical"
+                        android:background="@color/white"
+                        android:layout_height="40dp">
+
+                    <RadioButton
+                        android:id="@+id/rb_bdzf"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/app_margin_left"
+                        android:button="@null"
+                        android:drawableLeft="@mipmap/tip_iocn"
+                        android:text="被动加粉" />
+
+
+                    <ImageView
+                        android:id="@+id/iv_home_jf"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/app_margin_right"
+                        android:src="@mipmap/open_on" />
+                    </RelativeLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_alignParentBottom="true"
+                        android:paddingLeft="20dp"
+                        android:paddingRight="20dp"
+                        android:paddingBottom="3dp"
+                        android:paddingTop="3dp"
+                        android:gravity="center_vertical"
+                        android:layout_height="35dp">
+                        <TextView
+                            android:id="@+id/zhiding_txl_tv"
+                            android:gravity="center"
+                            android:layout_width="match_parent"
+                            android:text="置顶通讯录"
+                            android:textSize="15sp"
+                            android:background="@drawable/zd_txl_bg"
+                            android:textColor="@color/black"
+                            android:layout_height="match_parent" />
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_home_selectview"
+                    android:layout_width="match_parent"
+                    android:layout_height="75dp"
+                    android:background="#fff"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/tv_home_dq"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:drawableRight="@mipmap/ic_sj"
+                        android:gravity="center"
+                       android:ellipsize="end"
+                        android:singleLine="true"
+                        android:paddingBottom="10dp"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
+                        android:paddingTop="10dp"
+                        android:text="地区"
+                        android:textColor="@color/black"
+                        android:textSize="17sp"></TextView>
+                    <TextView
+                        android:id="@+id/tv_home_delete"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:textColor="@color/black"
+                        android:text="清除数据"/>
+                    <TextView
+                        android:id="@+id/tv_home_addfen"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:textColor="@color/white"
+                        android:background="#FF8C00"
+                        android:text="立即加粉"/>
+                </LinearLayout>
+
+            </android.support.design.widget.AppBarLayout>
+
+
+            <android.support.v4.widget.SwipeRefreshLayout
+                android:id="@+id/home_srf_ly"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="75dp">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rcv_home_personal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:overScrollMode="never"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+                </android.support.v7.widget.RecyclerView>
+            </android.support.v4.widget.SwipeRefreshLayout>
+        </android.support.design.widget.CoordinatorLayout>
+
+        <Button
+            android:id="@+id/btn_home_totop"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="20dp"
+            android:layout_marginRight="60dp"
+            android:background="@mipmap/ic_totop"
+            android:visibility="gone"
+             />
+    </RelativeLayout>
+</LinearLayout>

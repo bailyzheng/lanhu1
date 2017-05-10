@@ -1,0 +1,44 @@
+<resources>
+    <string name="app_name">蓝狐微商</string>
+    <string name="login_username_hint">请输入手机号</string>
+    <string name="login_pwd_hint">请输入密码</string>
+    <string name="register_username_hint">请输入手机号</string>
+    <string name="tv_zd">分享好友注册成功后，我们将送您一次置顶</string>
+    <string name="dhm">《兑换规则》</string>
+    <string name="dhm1">1.兑换码一经售出，不支持退款，不支持更换。</string>
+    <string name="dhm2">2.兑换码在购买时会注明有效期，请在有效期内使用。</string>
+    <string name="dhm3">3.如有问题，请联系我们。邮箱：anhuilanhu@163.com</string>
+    <string name="dhzd1">1.置顶标准为8狐币/次。</string>
+    <string name="dhzd2">2.置顶一次的时间为半小时。</string>
+    <string name="dhzd3">3.兑换的置顶次数将存入到您的账户中。</string>
+    <string name="dhzd4">4.最高优惠为单次兑换50次置顶，均价4狐币/次。</string>
+    <string name="dhzd5">5.更多优惠活动，请关注微信公众号“蓝狐生活馆”。</string>
+    <string name="czsm1">1.狐币与人民币的比例是1：1。</string>
+    <string name="czsm2">2.狐币可用于兑换置顶次数和开通VIP。</string>
+    <string name="czsm3">3.更多优惠活动，请关注微信公众号“蓝狐生活馆”。</string>
+    <string name="save_picture_failed">保存二维码失败</string>
+    <string name="save_picture_success">保存二维码成功</string>
+
+    <!-- WXPayEntryActivity -->
+    <string name="pay_result_tip">此界面用于显示第三方app通过微信支付的结果</string>
+    <string name="pay_result_callback_msg" formatted="false">微信支付结果：%s</string>
+    <string name="app_tip">提示</string>
+    <string name="hyts">为了满足更多用户的需求，特制定VIP特权：</string>
+    <string name="hyts1">1.尊贵红色昵称 </string>
+    <string name="hyts2">2.个性VIP标识</string>
+    <string name="hyts3">3.名片标题加红</string>
+    <string name="hyts4">4.名片标题加粗</string>
+    <string name="hyts5">5.支持被动爆粉 </string>
+    <string name="hyts6">6.支持个人名片自动刷新 </string>
+    <string name="hyts7">7.支持群名片自动刷新 </string>
+    <string name="hyts8">8.加粉名额提升至每天120个</string>
+    <string name="hyts9">自动刷新介绍：单次自动刷新周期为6小时，每10分钟自动刷新一次。已经置顶期间的名片不支持自动刷新；自动刷新的名片，可以置顶，置顶成功后，自动刷新将自动取消。</string>
+    <string name="havecode">点击微信右上方【＋】→【发起群聊】→【面对面建群】→随便输入4个数字→群聊创建成功→进入群聊→点击群聊右上角的小人，群资料里面有个群二维码→保存群二维码到手机→打开【蓝狐微商】上传即可。</string>
+    <!--最新地区-->
+    <string-array name="region">
+               
+        <item>最新发布</item>
+           
+    </string-array>
+
+</resources>

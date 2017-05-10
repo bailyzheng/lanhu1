@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_color"
+    android:orientation="vertical">
+
+    <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/coordinatorlayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+     <android.support.design.widget.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/appbarlayout"
+            android:background="@color/bg_color"
+            android:orientation="vertical"
+            android:fitsSystemWindows="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="#eee"
+                android:padding="5dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                app:layout_scrollFlags="scroll|enterAlways"
+                >
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_marginRight="5dp"
+                    android:paddingBottom="12dp"
+                    android:paddingTop="12dp"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:layout_height="56dp">
+                    <EditText
+                        android:id="@+id/search_edittext"
+                        android:layout_width="match_parent"
+                       android:singleLine="true"
+                        android:imeOptions="actionSearch"
+                        android:background="@drawable/et_groupsearch_bg"
+                        android:layout_height="match_parent" />
+                    <LinearLayout
+                        android:id="@+id/search_linearLayout"
+                        android:layout_width="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_centerInParent="true"
+                        android:gravity="center_vertical"
+                        android:layout_height="24dp">
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:src="@mipmap/ic_b_search"
+                            android:layout_height="wrap_content" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:text="请输入关键词搜索名片"
+                            android:textSize="13sp"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/tv_zdmp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="32dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/tv_zdql_bg"
+                    android:gravity="center"
+                    android:padding="5dp"
+                    android:textSize="13sp"
+                    android:text="置顶名片"
+                    android:textColor="@color/white" />
+
+            </LinearLayout>
+         <LinearLayout
+             android:id="@+id/ll_selectview"
+             android:layout_width="match_parent"
+             android:layout_height="?attr/actionBarSize"
+             android:background="#fff"
+             android:orientation="horizontal"
+             android:gravity="center_vertical"
+             >
+
+             <Spinner
+                 android:id="@+id/tv_zxfb"
+                 android:layout_width="0dp"
+                 android:layout_height="wrap_content"
+                 android:layout_weight="1"
+                 android:gravity="center"
+                 android:text="最新发布"
+                 android:drawableRight="@mipmap/ic_sj"
+                 android:paddingLeft="25dp"
+                 android:textColor="@color/black"
+                 android:textSize="17sp"
+                 android:entries="@+array/region" />
+
+             <TextView
+                 android:id="@+id/tv_dq"
+                 android:layout_width="0dp"
+                 android:layout_height="wrap_content"
+                 android:layout_weight="1"
+                 android:drawableRight="@mipmap/ic_sj"
+                 android:gravity="center"
+                 android:paddingBottom="10dp"
+                 android:paddingLeft="5dp"
+                 android:paddingRight="5dp"
+                 android:paddingTop="10dp"
+                 android:text="地区"
+                 android:textColor="@color/black"
+                 android:textSize="17sp"/>
+         </LinearLayout>
+
+        </android.support.design.widget.AppBarLayout>
+
+
+
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/srf_ly"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="?attr/actionBarSize"
+            >
+
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rcv_personal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:overScrollMode="never"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        </android.support.v7.widget.RecyclerView>
+        </android.support.v4.widget.SwipeRefreshLayout>
+    </android.support.design.widget.CoordinatorLayout>
+
+
+
+    <Button
+        android:id="@+id/btn_totop"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="60dp"
+        android:layout_marginRight="60dp"
+        android:background="@mipmap/ic_totop"
+        android:visibility="gone" />
+</RelativeLayout>

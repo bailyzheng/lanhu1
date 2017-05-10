@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_color"
+    android:orientation="vertical"
+    android:scrollbars="none">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/index_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/toolbar_color"
+        android:minHeight="?attr/actionBarSize"
+        android:visibility="visible">
+
+        <RadioGroup
+            android:id="@+id/rg_releae"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/rg_release_bg"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="0.5dp"
+            android:weightSum="2">
+
+            <RadioButton
+                android:id="@+id/rb_rpersonalcard"
+                style="@style/fragment_content_rb_release_style"
+                android:background="@drawable/rb_release_left_bg_dark"
+                android:text="个人名片" />
+
+            <RadioButton
+                android:id="@+id/rb_rgroupcard"
+                style="@style/fragment_content_rb_release_style"
+                android:background="@drawable/rb_release_right_bg_dark"
+                android:text="  群名片  " />
+        </RadioGroup>
+    </android.support.v7.widget.Toolbar>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:scrollbars="none"
+        android:layout_height="wrap_content"
+        android:background="@color/white">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="二维码："
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_marginTop="15dp">
+
+                <ImageView
+                    android:id="@+id/iv_erweima"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:scaleType="fitXY"
+                    android:src="@mipmap/add_pic" />
+
+                <TextView
+                    android:id="@+id/tv_geterm"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="15dp"
+                    android:layout_toRightOf="@id/iv_erweima"
+                    android:gravity="center_vertical"
+                    android:text="如何获取二维码？"
+                    android:textSize="13sp"
+                    android:textColor="@color/red" />
+
+                <TextView
+                    android:id="@+id/tv_release_preview"
+                    android:layout_width="40dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true"
+                    android:background="@drawable/rl_buy_zd_bg_p"
+                    android:paddingTop="3dp"
+                    android:paddingBottom="3dp"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:text="预览"
+                    android:textColor="@color/white"
+                    android:textSize="13sp" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+
+                android:layout_marginTop="15dp"
+                android:background="@color/gray_white" />
+            <LinearLayout
+                android:id="@+id/ll_release_fl"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:visibility="gone"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="分类："
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+                <TextView
+                    android:id="@+id/tv_release_choose_aear"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:textSize="13sp"
+                    android:drawableRight="@mipmap/ic_sj"
+                    android:text="选择名片分类"/>
+
+            </LinearLayout>
+            <View
+                android:id="@+id/v_release_line"
+                android:layout_width="match_parent"
+                android:visibility="gone"
+                android:layout_height="1dp"
+                android:background="@color/gray_white" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="地区："
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/personal_address_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:drawableRight="@mipmap/ic_sj"
+                    android:gravity="center_vertical"
+                    android:textSize="13sp"
+                    android:text="选择地区" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/gray_white" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="标题："
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+                <EditText
+                    android:id="@+id/personal_title_ed"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/white"
+                    android:textSize="13sp"
+                    android:hint="标题5-10个字" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/gray_white" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                android:orientation="horizontal"
+                android:paddingTop="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="描述："
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+                <EditText
+                    android:id="@+id/personal_miaoshu_ed"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/white"
+                    android:textSize="13sp"
+                    android:gravity="top"
+                    android:hint="给名片做个描述吧，10-260个字" />
+            </LinearLayout>
+
+
+
+            <Button
+                android:id="@+id/sure_fabu_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/app_margin_left"
+                android:layout_marginRight="@dimen/app_margin_left"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/bt_bg_round_dark"
+                android:layout_marginTop="40dp"
+                android:text="确认发布"
+                android:textColor="@color/white" />
+
+            <Button
+                android:visibility="gone"
+                android:id="@+id/sure_fabu_btn2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/app_margin_left"
+                android:layout_marginRight="@dimen/app_margin_left"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/bt_bg_round_dark"
+                android:layout_marginTop="40dp"
+                android:text="确认发布"
+                android:textColor="@color/white" />
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>

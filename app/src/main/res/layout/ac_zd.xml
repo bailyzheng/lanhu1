@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/index_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/toolbar_color"
+        android:minHeight="?attr/actionBarSize"
+        android:visibility="visible">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/iv_mine_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingRight="12dp"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_iv_back"/>
+            <RadioGroup
+                android:id="@+id/rg_mine_releae"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/rg_release_bg"
+                android:orientation="horizontal"
+                android:layout_centerInParent="true"
+                android:padding="0.5dp"
+                android:weightSum="2">
+
+                <RadioButton
+                    android:id="@+id/rb_mine_rpersonalcard"
+                    style="@style/fragment_content_rb_release_style"
+                    android:background="@drawable/rb_release_left_bg_dark"
+                    android:text="个人名片" />
+
+                <RadioButton
+                    android:id="@+id/rb_mine_rgroupcard"
+                    style="@style/fragment_content_rb_release_style"
+                    android:background="@drawable/rb_release_right_bg_dark"
+                    android:text="  群名片  " />
+            </RadioGroup>
+            <ImageView
+                android:id="@+id/iv_mine_share"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_iv_share"
+                android:layout_alignParentRight="true"
+                android:padding="@dimen/micro_text_size"
+                android:layout_centerVertical="true"/>
+        </RelativeLayout>
+
+
+
+
+
+
+    </android.support.v7.widget.Toolbar>
+    <!--<RelativeLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:paddingLeft="15dp"-->
+        <!--android:paddingRight="15dp"-->
+        <!--android:paddingTop="3dp"-->
+        <!--android:paddingBottom="3dp"-->
+        <!--android:background="@color/white"-->
+        <!--&gt;-->
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:textColor="@color/gray"-->
+            <!--android:textSize="12sp"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:text="@string/tv_zd"/>-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/tv_fenxiang"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:textColor="@color/white"-->
+            <!--android:textSize="12sp"-->
+            <!--android:padding="5dp"-->
+            <!--android:background="@drawable/bt_bg_round_dark"-->
+            <!--android:text="立即分享"-->
+            <!--android:layout_alignParentTop="true"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_alignParentEnd="true" />-->
+    <!--</RelativeLayout>-->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#cccccc"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:background="@color/white"
+        >
+        <TextView
+            android:id="@+id/tv_wd_day"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/red"
+            android:textSize="12sp"
+            android:layout_centerVertical="true"
+            android:text="友情提示：微信群二维码有效期为7天"/>
+
+        <TextView
+            android:id="@+id/tv_s_zdnum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/red"
+            android:textSize="12sp"
+            android:padding="5dp"
+            android:text="您当前剩余0次置顶"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_nor"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="20dp"
+        android:visibility="gone"
+        android:background="@color/white"
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="您当前未发布名片,快去发布吧~"
+                android:textSize="16sp"
+                android:textColor="@color/black"/>
+            <!--<TextView-->
+                <!--android:id="@+id/tv_tor"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="立即发布"-->
+                <!--android:textSize="16sp"-->
+                <!--android:textColor="@color/main_color"/>-->
+
+        </RelativeLayout>
+    </RelativeLayout>
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/srf_ly"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ListView
+            android:id="@+id/lv_zd"
+            android:layout_width="match_parent"
+            android:scrollbars="none"
+            android:divider="#00000000"
+            android:dividerHeight="5dip"
+            android:layout_height="match_parent">
+        </ListView>
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+</LinearLayout>

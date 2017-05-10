@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="zx">
+        <item>最新发布</item>
+        <item>人脉推广</item>
+        <item>宝妈互动</item>
+        <item>小白信息</item>
+        <item>兼职信息</item>
+    </string-array>
+
+
+</resources>

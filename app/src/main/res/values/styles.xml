@@ -1,0 +1,85 @@
+<resources>
+
+    <style name="ToolBarStyle" parent="Theme.AppCompat.NoActionBar">
+        <item name="actionMenuTextColor">@android:color/white</item>
+        <!-- 标题titile字体颜色 -->
+        <item name="android:textColorPrimary">#FFFFFF</item>
+
+    </style>
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <!-- Actionbar color -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <!--Status bar color-->
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <!--Window color-->
+        <item name="android:windowBackground">@color/gray_white</item>
+        <!-- toolbar的menu字体大小 -->
+        <item name="android:textSize">@dimen/medium_text_size</item>
+
+    </style>
+
+    <style name="custom_dialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <!-- Dialog的windowFrame框为无 -->
+        <item name="android:windowIsFloating">true</item>
+        <!-- 是否漂现在activity上 -->
+        <item name="android:windowIsTranslucent">true</item>
+        <!-- 是否半透明 -->
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <!-- 去除黑色边框的关键设置项 -->
+        <item name="android:backgroundDimEnabled">true</item>
+        <!-- 屏幕背景是否变暗 -->
+        <item name="android:backgroundDimAmount">0.6</item>
+    </style>
+
+    <!-- 主页4个RadioButton样式 -->
+    <style name="fragment_content_rb_style">
+        <item name="android:textSize">14sp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:padding">5dp</item>
+        <item name="android:background">@color/white</item>
+        <item name="android:drawablePadding">2dp</item>
+        <item name="android:textColor">@drawable/rb_tap_textcolor_selector</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:button">@null</item>
+        <item name="android:gravity">center</item>
+    </style>
+    <!--中间radioButton样式-->
+    <style name="fragment_content_rb_style1">
+        <item name="android:textSize">14sp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:padding">5dp</item>
+        <item name="android:background">@color/white</item>
+        <item name="android:drawablePadding">2dp</item>
+        <item name="android:textColor">@drawable/rb_tap_textcolor_selector</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:button">@null</item>
+        <item name="android:gravity">center</item>
+    </style>
+    <style name="NavPage">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">fill_parent</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:gravity">center_horizontal</item>
+        <!-- <item name="android:background">@drawable/nav_page</item> -->
+        <item name="android:background">@color/navpage</item>
+    </style>
+
+    <style name="fragment_content_rb_release_style">
+        <item name="android:textSize">14sp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:padding">2dp</item>
+        <item name="android:textColor">@drawable/rb_release_textcolor_selector</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:button">@null</item>
+        <item name="android:gravity">center</item>
+    </style>
+</resources>

@@ -1,0 +1,4 @@
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_checked="false" android:drawable="@drawable/rb_rectangle_left_bg_normal_dark"/><!-- selected -->
+    <item android:drawable="@drawable/rb_rectangle_left_bg_pressed_dark" /> <!-- default bg_list_item_normal -->
+</selector>  
