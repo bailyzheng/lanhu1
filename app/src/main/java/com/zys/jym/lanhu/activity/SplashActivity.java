@@ -26,6 +26,7 @@ import com.zys.jym.lanhu.bean.User;
 import com.zys.jym.lanhu.httpcallback.LoginCallback;
 import com.zys.jym.lanhu.utils.ActivityUtil;
 import com.zys.jym.lanhu.utils.LHHttpUrl;
+import com.zys.jym.lanhu.utils.MySharedPrefrencesUtil;
 import com.zys.jym.lanhu.utils.MyUtils;
 import com.zys.jym.lanhu.utils.SPrefUtil;
 
@@ -125,6 +126,9 @@ public class SplashActivity extends BaseActivity {
                     if (mData.errcode == 1) {
                         app.setIsLogin(true);
                         app.setUser(mData.data);
+//                        if(app.getPurseData()!=null&&Long.parseLong(app.getPurseData().getViprest()) > 0){
+//                            MySharedPrefrencesUtil.setParam(SplashActivity.this, "isAllowAdd", "open");
+//                        }
                         jumpActivity();
                     } else {
                         app.setIsLogin(false);
