@@ -109,6 +109,9 @@ public class AboutUsActivity extends BaseActivity implements View.OnClickListene
                     public void onResponse(UpdateApkData mData) {
                         MyUtils.dismssDialog();
                         MyUtils.Loge(TAG, "请求成功：mData=" + mData.toString());
+                        if(mData.getErrcode()==40001){
+
+                        }
                         if (mData.getErrcode() == 1) {
                             // 先判断是否有新版本 有弹提示框
                             if (!TextUtils.equals(mData.getData().getVersion(), getAppVersionName())) {

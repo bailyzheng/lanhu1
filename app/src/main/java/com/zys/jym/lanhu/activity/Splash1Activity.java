@@ -38,10 +38,9 @@ import java.util.Map;
 
 import okhttp3.Call;
 
-public class SplashActivity extends BaseActivity {
-    String TAG = "TAG--SplashActivity";
-//    private ImageView iv_splash;
-//    private ImageView iv_leaf;
+public class Splash1Activity extends BaseActivity {
+    String TAG = "TAG--Splash1Activity";
+
     private App app;
     boolean haveNewApk=false;//是否有新版本
     Handler handler = new Handler() {
@@ -66,7 +65,7 @@ public class SplashActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE); // 去除标题  必须在setContentView()方法之前调用
-        setContentView(R.layout.ac_splash);
+        setContentView(R.layout.activity_splash1);
         // 设置全屏
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         ActivityUtil.add(this);
@@ -100,7 +99,7 @@ public class SplashActivity extends BaseActivity {
             public void run() {
                 try {
                     Thread.sleep(6000);
-                    if (!SPrefUtil.getBoolean(SplashActivity.this, "finish", false)) {
+                    if (!SPrefUtil.getBoolean(Splash1Activity.this, "finish", false)) {
                         handler.sendEmptyMessage(2);
                         MyUtils.Loge(TAG, " 发送取消请求--");
                     }
@@ -110,11 +109,11 @@ public class SplashActivity extends BaseActivity {
             }
         }).start();
     }
-//
+    //
     private void login() {
-        SPrefUtil.setBoolean(SplashActivity.this, "finish", false);
-        final String phone = SPrefUtil.getString(SplashActivity.this, "PHONE", "");
-        final String pwd = SPrefUtil.getString(SplashActivity.this, "PWD", "");
+        SPrefUtil.setBoolean(Splash1Activity.this, "finish", false);
+        final String phone = SPrefUtil.getString(Splash1Activity.this, "PHONE", "");
+        final String pwd = SPrefUtil.getString(Splash1Activity.this, "PWD", "");
         if (!TextUtils.isEmpty(phone)) {
             RequestQueue volleyQueue=Volley.newRequestQueue(getApplicationContext());
             StringRequest stringRequest=new StringRequest(StringRequest.Method.POST, LHHttpUrl.LOGIN_URL, new Response.Listener<String>() {
@@ -135,8 +134,7 @@ public class SplashActivity extends BaseActivity {
                 @Override
                 public void onErrorResponse(VolleyError error) {
                     app.setIsLogin(false);
-                    MyUtils.showToast(SplashActivity.this,"网络有问题，请检查网络");
-//                    jumpActivity();
+                    MyUtils.showToast(Splash1Activity.this,"网络有问题，请检查网络");
                 }
             }){
                 @Override
@@ -184,7 +182,7 @@ public class SplashActivity extends BaseActivity {
     }
 
     private void jumpActivity() {
-        if (SPrefUtil.getBoolean(SplashActivity.this, "finish", false)) {
+        if (SPrefUtil.getBoolean(Splash1Activity.this, "finish", false)) {
             return;
         }
         if (haveNewApk) {
@@ -193,14 +191,14 @@ public class SplashActivity extends BaseActivity {
 //        if(!app.getIsLogin()){
 //            return;
 //        }
-        SPrefUtil.setBoolean(SplashActivity.this, "finish", true);
-        Intent intent =new Intent(SplashActivity.this, Main2Activity.class);
+        SPrefUtil.setBoolean(Splash1Activity.this, "finish", true);
+        Intent intent =new Intent(Splash1Activity.this, Main2Activity.class);
         startActivity(intent);
 //        if (app.getIsLogin()) {
-//            intent = new Intent(SplashActivity.this, MainActivity.class);
+//            intent = new Intent(Splash1Activity.this, MainActivity.class);
 //            startActivity(intent);
 //        } else {
-//            intent = new Intent(SplashActivity.this, LoginActivity.class);
+//            intent = new Intent(Splash1Activity.this, LoginActivity.class);
 //            startActivity(intent);
 //        }
         finish();

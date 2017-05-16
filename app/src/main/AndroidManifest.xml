@@ -65,7 +65,7 @@
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.USE_CREDENTIALS" />
     <uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
-    <!--腾讯bugly权限-->
+    <!-- 腾讯bugly权限 -->
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -86,7 +86,7 @@
         <meta-data
             android:name="com.amap.api.v2.apikey"
             android:value="ed567a11172e3ca064f40a25216e6acf" />
-        <!--android:launchMode="singleInstance"-->
+        <!-- android:launchMode="singleInstance" -->
 
         <activity
             android:name=".activity.SplashActivity"
@@ -100,13 +100,13 @@
         </activity>
         <activity
             android:name=".activity.MainActivity"
-            android:screenOrientation="portrait"
-            android:launchMode="singleTask"/>
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.LoginActivity"
+            android:launchMode="singleInstance"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize|stateHidden"
-            android:launchMode="singleInstance"/>
+            android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity
             android:name=".activity.RegisterActivity"
             android:screenOrientation="portrait"
@@ -363,16 +363,20 @@
             android:configChanges="orientation|keyboardHidden|navigation"
             android:exported="false"
             android:screenOrientation="behind" />
-        <activity android:name=".activity.UseInstructionsActivity"
+        <activity
+            android:name=".activity.UseInstructionsActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".activity.KeFu2Activity"
+        <activity
+            android:name=".activity.KeFu2Activity"
             android:screenOrientation="portrait" />
-        <activity android:name=".activity.ShareActivity"
+        <activity
+            android:name=".activity.ShareActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.UseInstructions2Activity"
             android:configChanges="orientation|screenSize|keyboardHidden"
-            android:screenOrientation="portrait" ></activity>
+            android:screenOrientation="portrait" />
+        <activity android:name=".activity.Splash1Activity"></activity>
     </application>
 
 </manifest>
