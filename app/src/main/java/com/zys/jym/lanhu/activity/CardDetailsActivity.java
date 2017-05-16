@@ -117,7 +117,7 @@ public class CardDetailsActivity extends BaseActivity implements View.OnClickLis
                         MyUtils.dismssDialog();
                         MyUtils.Loge(TAG, "请求成功：mData=" + mData.toString());
                         if (mData.getErrcode() == 1) {
-                            if (mData.getData().getHeadurl()!=null){
+                            if (mData!=null&&mData.getData()!=null&&mData.getData().getHeadurl()!=null){
                                 Picasso.with(CardDetailsActivity.this)
                                         .load(LHHttpUrl.IMG_URL + mData.getData().getHeadurl())
                                         .into(iv_head);

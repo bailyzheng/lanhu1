@@ -995,67 +995,6 @@ public class HomeFragment extends BaseFragment implements AMapLocationListener, 
                 break;
         }
     }
-
-    /**
-     * 添加通讯录到手机
-     */
-    public void number2phone() {
-//        thread = new Thread() {
-//            @Override
-//            public void run() {
-//                for (int i = 0; i < addPhoneList.size(); i++) {
-//                    MyUtils.Loge(TAG, "选中的电话号码：" + addPhoneList.get(i));
-//                    MyUtils.Loge(TAG, "选中的用户名：" + addNameList.get(i));
-////                    LXRUtil.addContacts(getActivity(), addPhoneList.get(i), false, addPhoneList.size(), 1);
-//                    LXRUtil.addContacts(getActivity(), addNameList.get(i), addPhoneList.get(i), false, addNameList.size(), 1);
-//                }
-//            }
-//        };
-//        new Thread(new Runnable() {
-//            @Override
-//            public void run() {
-//                for (int i = 0; i < addPhoneList.size(); i++) {
-//                    MyUtils.Loge(TAG, "选中的电话号码：" + addPhoneList.get(i));
-//                    MyUtils.Loge(TAG, "选中的用户名：" + addNameList.get(i));
-////                    LXRUtil.addContacts(getActivity(), addPhoneList.get(i), false, addPhoneList.size(), 1);
-//                    LXRUtil.addContacts(getActivity(), addNameList.get(i), addPhoneList.get(i), false, addNameList.size(), 1);
-//                }
-//            }
-//        }).start();
-    }
-
-//    /**
-//     * 权限回调
-//     *
-//     * @param requestCode
-//     * @param permissions
-//     * @param grantResults
-//     */
-//    @Override
-//    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-//        switch (requestCode) {
-//            case 0x1:
-//                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-//                    MyUtils.showDialog(getActivity(), "正在添加通讯录...");
-//                } else {
-//                    if (!ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), Manifest.permission.WRITE_CONTACTS)) {
-//                        MyUtils.showToast(getActivity(), "请先打开权限再继续操作");
-//                    }
-//                }
-//                break;
-//            case 0x2:
-//                new Thread(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        LXRUtil.deleteContacts(mActivity);
-//                    }
-//                }).start();
-//                break;
-//
-//        }
-//        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-//    }
-
     /**
      * 是否允许被加粉
      */
