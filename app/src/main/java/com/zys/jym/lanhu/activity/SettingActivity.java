@@ -181,12 +181,13 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
     }
 
     private void Logout() {
-        if(getApplicationContext()!=null&&getApplicationContext().getUser()!=null&&!TextUtils.isEmpty(getApplicationContext().getUser().getLogin_token())) {
+//        if(getApplicationContext()!=null&&getApplicationContext().getUser()!=null&&!TextUtils.isEmpty(getApplicationContext().getUser().getLogin_token())) {
             OkHttpUtils
                     .post()
                     .tag(this)
                     .url(LHHttpUrl.LOGOUT_URL)
-                    .addParams("login_token", getApplicationContext().getUser().getLogin_token())
+//                    .addParams("login_token", getApplicationContext().getUser().getLogin_token())
+                    .addParams("login_token", SPrefUtil.getString(SettingActivity.this,"TOKEN",""))
                     .build()
                     .execute(new NormalCallback() {
                         @Override
@@ -197,10 +198,9 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
                         @Override
                         public void onResponse(NormalData mData) {
                             MyUtils.Loge(TAG, "请求成功：mData=" + mData.toString());
-
-
                             getApplicationContext().setIsLogin(false);
-                            SPrefUtil.setString(SettingActivity.this, "PHONE", " ");
+                            SPrefUtil.setString(SettingActivity.this, "PHONE", "");
+                            SPrefUtil.setString(SettingActivity.this,"PWD","");
                             Intent in = new Intent(SettingActivity.this, LoginActivity.class);
                             in.putExtra("logout", true);
                             Main2Activity.ma.finish();
@@ -212,7 +212,7 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
                             System.exit(0);
                         }
                     });
-        }
+//        }
     }
 
     public  static  void setHeadImg(Intent data){

@@ -106,6 +106,11 @@ public class ZDStreamActivity extends BaseActivity implements SwipeRefreshLayout
                             MyUtils.dismssDialog();
                             srf_ly.setRefreshing(false);
                             MyUtils.Loge(TAG, "请求成功：mData=" + mData.toString());
+                            if(mData.getErrcode()==40001){
+                                ActivityUtil.exitAll();
+                                ActivityUtil.toLogin(ZDStreamActivity.this);
+                                return;
+                            }
                             if (mData.getErrcode() == 1) {
                                 if (mData.getData().getLogList().size() != 0) {
                                     lv_zdstream.setVisibility(View.VISIBLE);

@@ -141,6 +141,11 @@ public class SearchActivity extends BaseActivity implements AdapterView.OnItemCl
                     public void onResponse(MyTopData mData) {
                         MyUtils.dismssDialog();
                         MyUtils.Loge(TAG, "请求成功：mData=" + mData.toString());
+                        if(mData.getErrcode()==40001){
+                            ActivityUtil.exitAll();
+                            ActivityUtil.toLogin(SearchActivity.this);
+                            return;
+                        }
                         if (mData.getErrcode()==1){
                             if (mData.getData().getTopicList().size()!=0){
                                 lv_search.setVisibility(View.VISIBLE);

@@ -91,6 +91,11 @@ public class SelectP2Activity extends BaseActivity implements AdapterView.OnItem
                     public void onResponse(GetPData mData) {
                         MyUtils.dismssDialog();
                         MyUtils.Loge(TAG, "请求成功：mData=" + mData.toString());
+                        if(mData.errcode==40001){
+                            ActivityUtil.exitAll();
+                            ActivityUtil.toLogin(SelectP2Activity.this);
+                            return;
+                        }
                         if (mData.errcode==1){
 //                            MyUtils.showToast(LoginActivity.this,"登陆成功");
                             if (mData.getData().size()!=0){

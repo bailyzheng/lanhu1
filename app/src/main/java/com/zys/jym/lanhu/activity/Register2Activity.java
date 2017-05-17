@@ -194,6 +194,11 @@ public class Register2Activity extends BaseActivity implements View.OnClickListe
                     public void onResponse(RegisterData mData) {
                         MyUtils.dismssDialog();
                         MyUtils.Loge(TAG, "请求成功：mData=" + mData.toString());
+                        if(mData.errcode==40001){
+                            ActivityUtil.exitAll();
+                            ActivityUtil.toLogin(Register2Activity.this);
+                            return;
+                        }
                         if (mData.errcode==1){
                             MyUtils.showToast(Register2Activity.this,"注册成功!");
                             getApplicationContext().setUser(mData.data);

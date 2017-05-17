@@ -20,6 +20,7 @@ import com.zys.jym.lanhu.httpcallback.StreamCallback;
 import com.zys.jym.lanhu.utils.ActivityUtil;
 import com.zys.jym.lanhu.utils.LHHttpUrl;
 import com.zys.jym.lanhu.utils.MyUtils;
+import com.zys.jym.lanhu.utils.SPrefUtil;
 import com.zys.jym.lanhu.utils.ScreenUtil;
 
 import java.util.ArrayList;
@@ -33,15 +34,17 @@ import okhttp3.Call;
  */
 
 public class HBStreamActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener {
-    String TAG="TAG--HBStreamActivity";
+    String TAG = "TAG--HBStreamActivity";
     Toolbar index_toolbar;
     SwipeRefreshLayout srf_ly;
     ListView lv_hbstream;
-    List<HB_ZDStream> mHBStreamlist=new ArrayList<HB_ZDStream>();;
+    List<HB_ZDStream> mHBStreamlist = new ArrayList<HB_ZDStream>();
+    ;
     StreamLvAdapter mAdapter;
-    boolean scrollFlag= false;// 标记是否滑动
+    boolean scrollFlag = false;// 标记是否滑动
     private int lastVisibleItemPosition = 0;// 标记上次滑动位置
-    int page=1;
+    int page = 1;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,7 +56,7 @@ public class HBStreamActivity extends BaseActivity implements SwipeRefreshLayout
     }
 
     private void initToolBar() {
-        index_toolbar= (Toolbar) findViewById(R.id.index_toolbar);
+        index_toolbar = (Toolbar) findViewById(R.id.index_toolbar);
         index_toolbar.setTitle("");
         index_toolbar.setTitleTextColor(Color.WHITE);
         index_toolbar.setNavigationIcon(R.mipmap.backimg);
@@ -68,91 +71,95 @@ public class HBStreamActivity extends BaseActivity implements SwipeRefreshLayout
     }
 
     private void initViews() {
-        srf_ly= (SwipeRefreshLayout) findViewById(R.id.srf_ly);
+        srf_ly = (SwipeRefreshLayout) findViewById(R.id.srf_ly);
         //改变加载显示的颜色
         srf_ly.setColorSchemeColors(getResources().getColor(R.color.main_color));
         srf_ly.setOnRefreshListener(this);
-        lv_hbstream= (ListView) findViewById(R.id.lv_stream);
+        lv_hbstream = (ListView) findViewById(R.id.lv_stream);
         initListViewScroll();
     }
 
     private void initData() {
-        getData(page,true);
+        getData(page, true);
     }
 
-    private void getData(final int mPage,boolean isV) {
-        if (isV){
-            MyUtils.showDialog(HBStreamActivity.this,"加载中...");
+    private void getData(final int mPage, boolean isV) {
+        if (isV) {
+            MyUtils.showDialog(HBStreamActivity.this, "加载中...");
         }
-        if(getApplicationContext()!=null&&getApplicationContext().getUser()!=null&&!TextUtils.isEmpty(getApplicationContext().getUser().getLogin_token())) {
-            OkHttpUtils
-                    .post()
-                    .tag(this)
-                    .url(LHHttpUrl.GETPURSELOG_URL)
-                    .addParams("login_token", getApplicationContext().getUser().getLogin_token())
-                    .addParams("p", mPage + "")
-                    .build()
-                    .execute(new StreamCallback() {
-                        @Override
-                        public void onError(Call call, Exception e) {
-                            srf_ly.setRefreshing(false);
-                            MyUtils.dismssDialog();
-                            MyUtils.Loge(TAG, "请求失败：call=" + call.toString() + "--e=" + e.toString());
-                            MyUtils.showToast(HBStreamActivity.this, "连接服务器失败，请稍后再试");
+//        if(getApplicationContext()!=null&&getApplicationContext().getUser()!=null&&!TextUtils.isEmpty(getApplicationContext().getUser().getLogin_token())) {
+        OkHttpUtils
+                .post()
+                .tag(this)
+                .url(LHHttpUrl.GETPURSELOG_URL)
+//                .addParams("login_token", getApplicationContext().getUser().getLogin_token())
+                .addParams("login_token", SPrefUtil.getString(HBStreamActivity.this,"TOKEN",""))
+                .addParams("p", mPage + "")
+                .build()
+                .execute(new StreamCallback() {
+                    @Override
+                    public void onError(Call call, Exception e) {
+                        srf_ly.setRefreshing(false);
+                        MyUtils.dismssDialog();
+                        MyUtils.Loge(TAG, "请求失败：call=" + call.toString() + "--e=" + e.toString());
+                        MyUtils.showToast(HBStreamActivity.this, "连接服务器失败，请稍后再试");
+                    }
+
+                    @Override
+                    public void onResponse(StreamData mData) {
+                        MyUtils.dismssDialog();
+                        srf_ly.setRefreshing(false);
+                        MyUtils.Loge(TAG, "请求成功：mData=" + mData.toString());
+                        if (mData.getErrcode() == 40001) {
+                            ActivityUtil.exitAll();
+                            ActivityUtil.toLogin(HBStreamActivity.this);
+                            return;
                         }
-
-                        @Override
-                        public void onResponse(StreamData mData) {
-                            MyUtils.dismssDialog();
-                            srf_ly.setRefreshing(false);
-                            MyUtils.Loge(TAG, "请求成功：mData=" + mData.toString());
-                            if (mData.getErrcode() == 1) {
-                                if (mData.getData().getLogList().size() != 0) {
-                                    lv_hbstream.setVisibility(View.VISIBLE);
-                                    if (mPage == 1) {
-                                        mHBStreamlist.clear();
-                                        mHBStreamlist.addAll(mData.getData().getLogList());
-                                    } else {
-                                        mHBStreamlist.addAll(mData.getData().getLogList());
-                                    }
-                                    if (mAdapter != null) {
-                                        mAdapter.notifyDataSetChanged();
-                                    } else {
-                                        mAdapter = new StreamLvAdapter(HBStreamActivity.this, mHBStreamlist, 1);
-                                        lv_hbstream.setAdapter(mAdapter);
-                                    }
-
+                        if (mData.getErrcode() == 1) {
+                            if (mData.getData().getLogList().size() != 0) {
+                                lv_hbstream.setVisibility(View.VISIBLE);
+                                if (mPage == 1) {
+                                    mHBStreamlist.clear();
+                                    mHBStreamlist.addAll(mData.getData().getLogList());
                                 } else {
-                                    MyUtils.Loge(TAG, "没有更多数据");
-                                    if (page == 1) {
-                                        lv_hbstream.setVisibility(View.INVISIBLE);
-                                        //MyUtils.showToast(HBStreamActivity.this,mData.getErrmsg());
-                                    }
-                                    page--;
-                                    if (page < 1) {
-                                        page = 1;
-                                    }
+                                    mHBStreamlist.addAll(mData.getData().getLogList());
                                 }
+                                if (mAdapter != null) {
+                                    mAdapter.notifyDataSetChanged();
+                                } else {
+                                    mAdapter = new StreamLvAdapter(HBStreamActivity.this, mHBStreamlist, 1);
+                                    lv_hbstream.setAdapter(mAdapter);
+                                }
+
                             } else {
-                                MyUtils.Loge(TAG, "page=" + page);
-                                if (mPage > 1) {
-                                    page--;
-                                    if (page < 1) {
-                                        page = 1;
-                                    }
-                                    MyUtils.Loge(TAG, "page1=" + page);
-                                } else {
+                                MyUtils.Loge(TAG, "没有更多数据");
+                                if (page == 1) {
                                     lv_hbstream.setVisibility(View.INVISIBLE);
+                                    //MyUtils.showToast(HBStreamActivity.this,mData.getErrmsg());
                                 }
-                                //MyUtils.showToast(HBStreamActivity.this, mData.getErrmsg());
+                                page--;
+                                if (page < 1) {
+                                    page = 1;
+                                }
                             }
-
+                        } else {
+                            MyUtils.Loge(TAG, "page=" + page);
+                            if (mPage > 1) {
+                                page--;
+                                if (page < 1) {
+                                    page = 1;
+                                }
+                                MyUtils.Loge(TAG, "page1=" + page);
+                            } else {
+                                lv_hbstream.setVisibility(View.INVISIBLE);
+                            }
+                            //MyUtils.showToast(HBStreamActivity.this, mData.getErrmsg());
                         }
-                    });
-        }
+
+                    }
+                });
+//        }
     }
-
-
 
 
     //上滑出现回到顶部按钮
@@ -169,7 +176,7 @@ public class HBStreamActivity extends BaseActivity implements SwipeRefreshLayout
                         // 判断滚动到底部
                         if (lv_hbstream.getLastVisiblePosition() == (lv_hbstream.getCount() - 1)) {
                             page++;
-                            getData(page,false);
+                            getData(page, false);
                         }
 //                        // 判断滚动到顶部
 //                        if (lv_hbstream.getFirstVisiblePosition() == 0) {
@@ -218,14 +225,13 @@ public class HBStreamActivity extends BaseActivity implements SwipeRefreshLayout
     @Override
     public void onRefresh() {
         page = 1;
-        getData(page,false);
+        getData(page, false);
     }
-
 
 
     @Override
     protected void onDestroy() {
-        mAdapter=null;
+        mAdapter = null;
         mHBStreamlist.clear();
         super.onDestroy();
         ActivityUtil.delect(this);

@@ -170,14 +170,19 @@ public class FindPwd2Activity extends BaseActivity implements View.OnClickListen
                     @Override
                     public void onError(Call call, Exception e) {
                         MyUtils.dismssDialog();
-                        MyUtils.Loge(TAG, "请求失败：call=" + call.toString() + "--e=" + e.toString());
+//                        MyUtils.Loge(TAG, "请求失败：call=" + call.toString() + "--e=" + e.toString());
                         MyUtils.showToast(FindPwd2Activity.this, "连接服务器失败，请稍后再试");
                     }
 
                     @Override
                     public void onResponse(NormalData mData) {
                         MyUtils.dismssDialog();
-                        MyUtils.Loge(TAG, "请求成功：mData=" + mData.toString());
+//                        MyUtils.Loge(TAG, "请求成功：mData=" + mData.toString());
+                        if(mData.errcode==40001){
+                            ActivityUtil.exitAll();
+                            ActivityUtil.toLogin(FindPwd2Activity.this);
+                            return;
+                        }
                         if (mData.errcode==1){
                             MyUtils.showToast(FindPwd2Activity.this,mData.getErrmsg());
                             finish();

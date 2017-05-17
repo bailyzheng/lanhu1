@@ -22,6 +22,7 @@ import com.zys.jym.lanhu.fragment.impl.PersonalFragment;
 import com.zys.jym.lanhu.fragment.impl.R_PersonalCardFragment;
 import com.zys.jym.lanhu.fragment.impl.ReleaseFragment;
 import com.zys.jym.lanhu.httpcallback.GetCCallback;
+import com.zys.jym.lanhu.utils.ActivityUtil;
 import com.zys.jym.lanhu.utils.LHHttpUrl;
 import com.zys.jym.lanhu.utils.MyUtils;
 
@@ -91,6 +92,11 @@ public class SelectC2Activity extends BaseActivity implements AdapterView.OnItem
                     public void onResponse(GetCData mData) {
                         MyUtils.dismssDialog();
                         MyUtils.Loge(TAG, "请求成功：mData=" + mData.toString());
+                        if(mData.errcode==40001){
+                            ActivityUtil.exitAll();
+                            ActivityUtil.toLogin(SelectC2Activity.this);
+                            return;
+                        }
                         if (mData.errcode==1){
                             if (mData.getData().size()!=0){
                                 lv_c.setAdapter(new C2_lv_Adapter(SelectC2Activity.this,mData.getData()));

@@ -70,9 +70,10 @@ public class Splash1Activity extends BaseActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         ActivityUtil.add(this);
         app = getApplicationContext();
-        getApkV();//检查更新
-        initStartTime();
-        initEndTime();
+//        getApkV();//检查更新
+//        initStartTime();
+//        initEndTime();
+        startActivity(new Intent(this,Main2Activity.class));
     }
 
     private void getApkV() {

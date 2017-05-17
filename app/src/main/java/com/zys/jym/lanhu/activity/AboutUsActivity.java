@@ -1,6 +1,7 @@
 package com.zys.jym.lanhu.activity;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
@@ -110,7 +111,9 @@ public class AboutUsActivity extends BaseActivity implements View.OnClickListene
                         MyUtils.dismssDialog();
                         MyUtils.Loge(TAG, "请求成功：mData=" + mData.toString());
                         if(mData.getErrcode()==40001){
-
+                            ActivityUtil.exitAll();
+                            ActivityUtil.toLogin(AboutUsActivity.this);
+                            return;
                         }
                         if (mData.getErrcode() == 1) {
                             // 先判断是否有新版本 有弹提示框

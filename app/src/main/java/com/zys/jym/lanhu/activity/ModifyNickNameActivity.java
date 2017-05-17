@@ -17,6 +17,7 @@ import com.zys.jym.lanhu.httpcallback.LoginCallback;
 import com.zys.jym.lanhu.utils.ActivityUtil;
 import com.zys.jym.lanhu.utils.LHHttpUrl;
 import com.zys.jym.lanhu.utils.MyUtils;
+import com.zys.jym.lanhu.utils.SPrefUtil;
 
 import okhttp3.Call;
 
@@ -84,12 +85,13 @@ public class ModifyNickNameActivity extends BaseActivity implements View.OnClick
 
     private void postData() {
         MyUtils.showDialog(ModifyNickNameActivity.this,"正在修改...");
-        if(getApplicationContext()!=null&&getApplicationContext().getUser()!=null&&!TextUtils.isEmpty(getApplicationContext().getUser().getLogin_token())) {
+//        if(getApplicationContext()!=null&&getApplicationContext().getUser()!=null&&!TextUtils.isEmpty(getApplicationContext().getUser().getLogin_token())) {
             OkHttpUtils
                     .post()
                     .tag(this)
                     .url(LHHttpUrl.MODIFYINFO_URL)
-                    .addParams("login_token", getApplicationContext().getUser().getLogin_token())
+//                    .addParams("login_token", getApplicationContext().getUser().getLogin_token())
+                    .addParams("login_token", SPrefUtil.getString(ModifyNickNameActivity.this,"TOKEN",""))
                     .addParams("type", "1")
                     .addParams("info", et_nickname.getText().toString().trim())
                     .build()
@@ -106,13 +108,18 @@ public class ModifyNickNameActivity extends BaseActivity implements View.OnClick
                             MyUtils.dismssDialog();
                             MyUtils.Loge(TAG, "请求成功：mData=" + mData.toString());
                             MyUtils.showToast(ModifyNickNameActivity.this, mData.errmsg);
+                            if(mData.errcode==40001){
+                                ActivityUtil.exitAll();
+                                ActivityUtil.toLogin(ModifyNickNameActivity.this);
+                                return;
+                            }
                             if (mData.errcode == 1) {
                                 getApplicationContext().getUser().setNickname(et_nickname.getText().toString().trim());
                                 MineFragment.handler.sendEmptyMessage(0x1);
                             }
                         }
                     });
-        }
+//        }
 
     }
 

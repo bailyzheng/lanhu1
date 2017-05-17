@@ -18,6 +18,7 @@ import com.zys.jym.lanhu.httpcallback.MsgCallback;
 import com.zys.jym.lanhu.utils.ActivityUtil;
 import com.zys.jym.lanhu.utils.LHHttpUrl;
 import com.zys.jym.lanhu.utils.MyUtils;
+import com.zys.jym.lanhu.utils.SPrefUtil;
 
 import okhttp3.Call;
 
@@ -65,12 +66,13 @@ public class MsgCenterActivity extends BaseActivity implements AdapterView.OnIte
 
     private void getData() {
         MyUtils.showDialog(MsgCenterActivity.this,"加载中...");
-        if(getApplicationContext()!=null&&getApplicationContext().getUser()!=null&&!TextUtils.isEmpty(getApplicationContext().getUser().getLogin_token())) {
+//        if(getApplicationContext()!=null&&getApplicationContext().getUser()!=null&&!TextUtils.isEmpty(getApplicationContext().getUser().getLogin_token())) {
             OkHttpUtils
                     .post()
                     .tag(this)
                     .url(LHHttpUrl.INFORMLIST_URL)
-                    .addParams("login_token", getApplicationContext().getUser().getLogin_token())
+//                    .addParams("login_token", getApplicationContext().getUser().getLogin_token())
+                    .addParams("login_token", SPrefUtil.getString(MsgCenterActivity.this,"TOKEN",""))
                     .build()
                     .execute(new MsgCallback() {
                         @Override
@@ -84,6 +86,11 @@ public class MsgCenterActivity extends BaseActivity implements AdapterView.OnIte
                         public void onResponse(MsgCenterData mData) {
                             MyUtils.dismssDialog();
                             MyUtils.Loge(TAG, "请求成功：mData=" + mData.toString());
+                            if(mData.getErrcode()==40001){
+                                ActivityUtil.exitAll();
+                                ActivityUtil.toLogin(MsgCenterActivity.this);
+                                return;
+                            }
                             if (mData.getErrcode() == 1) {
                                 if (mData.getData().getLogList().size() != 0) {
                                     MsgCenterLvAdapter mAdapter = new MsgCenterLvAdapter(MsgCenterActivity.this, mData.getData().getLogList());
@@ -97,7 +104,7 @@ public class MsgCenterActivity extends BaseActivity implements AdapterView.OnIte
 
                         }
                     });
-        }
+//        }
     }
 
 

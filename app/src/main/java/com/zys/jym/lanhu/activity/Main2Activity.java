@@ -54,6 +54,7 @@ import com.zys.jym.lanhu.utils.LXRUtil;
 import com.zys.jym.lanhu.utils.MediaUtil;
 import com.zys.jym.lanhu.utils.MySharedPrefrencesUtil;
 import com.zys.jym.lanhu.utils.MyUtils;
+import com.zys.jym.lanhu.utils.SPrefUtil;
 import com.zys.jym.lanhu.utils.SaveCodeUtil;
 import com.zys.jym.lanhu.utils.SavePicUtil;
 
@@ -376,6 +377,7 @@ public class Main2Activity extends BaseActivity implements View.OnClickListener 
                 boolean buttonChecked = rb.isChecked();
                 if (buttonChecked) {//用户点击触发,或后退键出发
                     if (getApplicationContext().getIsLogin()) {
+
                         if (currentContainer != null && !TextUtils.isEmpty(String.valueOf(currentContainer.getId()))) {
                             if (checkedId != currentContainer.getId()) {
                                 unSelectCurrentTab();
@@ -514,40 +516,46 @@ public class Main2Activity extends BaseActivity implements View.OnClickListener 
      * 获取账户余额信息
      */
     public static void getPurseData(final boolean dhzd) {
-        if (app!=null&&!app.getIsLogin()) {
+        if (app != null && !app.getIsLogin()) {
             return;
         }
-        if(app!=null&&app.getUser()!=null&&!TextUtils.isEmpty(app.getUser().getLogin_token())) {
-            OkHttpUtils
-                    .post()
-                    .url(LHHttpUrl.FLUSH_URL)
-                    .addParams("login_token", app.getUser().getLogin_token())
-                    .build()
-                    .execute(new GetPurseCallback() {
-                        @Override
-                        public void onError(Call call, Exception e) {
-                            MyUtils.Loge(TAG, "请求失败：call=" + call.toString() + "--e=" + e.toString());
-                        }
+//        if(app!=null&&app.getUser()!=null&&!TextUtils.isEmpty(app.getUser().getLogin_token())) {
+        OkHttpUtils
+                .post()
+                .url(LHHttpUrl.FLUSH_URL)
+//                .addParams("login_token", app.getUser().getLogin_token())
+                .addParams("login_token", SPrefUtil.getString(ma,"TOKEN",""))
+                .build()
+                .execute(new GetPurseCallback() {
+                    @Override
+                    public void onError(Call call, Exception e) {
+                        MyUtils.Loge(TAG, "请求失败：call=" + call.toString() + "--e=" + e.toString());
+                    }
 
-                        @Override
-                        public void onResponse(GetPurseData mData) {
-                            MyUtils.Loge(TAG, "请求成功：mData1=" + mData.toString());
-                            if (mData.getErrcode() == 1) {
-                                MyUtils.Loge(TAG, "user=" + mData.getUserDate() + "，账户信息=" + mData.getUserInfo());
-                                app.setPurseData(mData.getUserDate());
-                                app.getUser().setViptime(mData.getUserInfo().getViptime());
-                                app.getPurseData().setViprest(mData.getUserDate().getViprest());
+                    @Override
+                    public void onResponse(GetPurseData mData) {
+                        MyUtils.Loge(TAG, "请求成功：mData1=" + mData.toString());
+                        if (mData.getErrcode() == 40001) {
+                            ActivityUtil.exitAll();
+                            ActivityUtil.toLogin(ma);
+                            return;
+                        }
+                        if (mData.getErrcode() == 1) {
+                            MyUtils.Loge(TAG, "user=" + mData.getUserDate() + "，账户信息=" + mData.getUserInfo());
+                            app.setPurseData(mData.getUserDate());
+                            app.getUser().setViptime(mData.getUserInfo().getViptime());
+                            app.getPurseData().setViprest(mData.getUserDate().getViprest());
 //                            app.getUser().set
-                                if (MineFragment.isResume) {
-                                    MineFragment.setPData(mData.getUserDate());
-                                }
-                                if (dhzd) {
-                                    ZDActivity.setZDNum();
-                                }
+                            if (MineFragment.isResume) {
+                                MineFragment.setPData(mData.getUserDate());
+                            }
+                            if (dhzd) {
+                                ZDActivity.setZDNum();
                             }
                         }
-                    });
-        }
+                    }
+                });
+//        }
 
     }
 
@@ -566,6 +574,11 @@ public class Main2Activity extends BaseActivity implements View.OnClickListener 
                     @Override
                     public void onResponse(UpdateApkData mData) {
                         MyUtils.Loge(TAG, "请求成功：mData=" + mData.toString());
+                        if (mData.getErrcode() == 40001) {
+                            ActivityUtil.exitAll();
+                            ActivityUtil.toLogin(Main2Activity.this);
+                            return;
+                        }
                         if (mData.getErrcode() == 1) {
                             // 先判断是否有新版本 有弹提示框
                             if (!TextUtils.equals(mData.getData().getVersion(), getAppVersionName())) {
@@ -657,9 +670,9 @@ public class Main2Activity extends BaseActivity implements View.OnClickListener 
 
     public Fragment getVisibleFragment() {
         FragmentManager fragmentManager = Main2Activity.this.getSupportFragmentManager();
-        List<Fragment> fragments=new ArrayList<>();
+        List<Fragment> fragments = new ArrayList<>();
         fragments = fragmentManager.getFragments();
-        if(fragments.size()>0) {
+        if (fragments.size() > 0) {
             for (Fragment fragment : fragments) {
                 if (fragment != null && fragment.isVisible())
                     return fragment;

@@ -50,9 +50,11 @@ public class SplashActivity extends BaseActivity {
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case 1:
+                    MyUtils.Loge("bbb","111111111");
                     login();
                     break;
                 case 2:
+                    MyUtils.Loge("bbb","2222222222");
                     OkHttpUtils.getInstance().cancelTag(this);
                     app.setIsLogin(false);
                     jumpActivity();

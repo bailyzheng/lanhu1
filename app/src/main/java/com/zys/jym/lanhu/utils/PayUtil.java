@@ -10,6 +10,7 @@ import android.text.TextUtils;
 
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zys.jym.lanhu.App;
+import com.zys.jym.lanhu.activity.ComplaintActivity;
 import com.zys.jym.lanhu.activity.Main2Activity;
 import com.zys.jym.lanhu.activity.RechargeActivity;
 import com.zys.jym.lanhu.activity.ZDActivity;
@@ -56,11 +57,13 @@ public class PayUtil {
 //        MyUtils.Loge(TAG, "login_token=" + app.getUser().getLogin_token()
 //                + ",opmoney=" + opmoney + ",payType=" + payType + ",opType=" + opType + ",opNum=" + opNum);
         MyUtils.showDialog(activity, "下单中...");
-        if(app!=null&&app.getUser()!=null&&!TextUtils.isEmpty(app.getUser().getLogin_token())) {
+//        if(app!=null&&app.getUser()!=null&&!TextUtils.isEmpty(app.getUser().getLogin_token())) {
+        if(!TextUtils.isEmpty(SPrefUtil.getString(activity,"TOKEN",""))){
             OkHttpUtils
                     .post()
                     .url(LHHttpUrl.PREPAY_URL)
-                    .addParams("login_token", app.getUser().getLogin_token())
+//                    .addParams("login_token", app.getUser().getLogin_token())
+                    .addParams("login_token", SPrefUtil.getString(activity,"TOKEN",""))
                     .addParams("opmoney", (opmoney * 100) + "")//opmoney*100
                     .addParams("payType", payType + "")
                     .addParams("opType", opType + "")
@@ -78,6 +81,11 @@ public class PayUtil {
                         public void onResponse(ToPayData mData) {
                             MyUtils.dismssDialog();
                             MyUtils.Loge(TAG, "请求成功：mData=" + mData.toString());
+                            if(mData.getErrcode()==40001){
+                                ActivityUtil.exitAll();
+                                ActivityUtil.toLogin(activity);
+                                return;
+                            }
                             if (mData.getErrcode() == 1) {
                                 if (payType == 1) {
                                     MyUtils.Loge(TAG, "调起微信支付");

@@ -32,6 +32,7 @@ import com.squareup.picasso.Picasso;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.https.HttpsUtils;
 import com.zys.jym.lanhu.R;
+import com.zys.jym.lanhu.activity.ComplaintActivity;
 import com.zys.jym.lanhu.activity.Main2Activity;
 import com.zys.jym.lanhu.activity.ModifyDataActivity;
 import com.zys.jym.lanhu.activity.PreviewActivity;
@@ -50,11 +51,13 @@ import com.zys.jym.lanhu.fragment.FragmentContainer;
 import com.zys.jym.lanhu.httpcallback.FabuSuccessCallback;
 import com.zys.jym.lanhu.httpcallback.UpEWMCallback;
 import com.zys.jym.lanhu.httpcallback.UpHeadImgCallback;
+import com.zys.jym.lanhu.utils.ActivityUtil;
 import com.zys.jym.lanhu.utils.LHHttpUrl;
 import com.zys.jym.lanhu.utils.MediaUtil;
 import com.zys.jym.lanhu.utils.MySharedPrefrencesUtil;
 import com.zys.jym.lanhu.utils.MyUtils;
 import com.zys.jym.lanhu.utils.RequestCode;
+import com.zys.jym.lanhu.utils.SPrefUtil;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -413,12 +416,13 @@ public class ReleaseFragment extends BaseFragment implements View.OnClickListene
 //        } else {
 //            type = 1;
 //        }
-        if(app!=null&&app.getUser()!=null&&!TextUtils.isEmpty(app.getUser().getLogin_token())) {
+//        if(app!=null&&app.getUser()!=null&&!TextUtils.isEmpty(app.getUser().getLogin_token())) {
             OkHttpUtils
                     .post()
                     .tag(this)
                     .url(LHHttpUrl.ADDTOPIC_URL)
-                    .addParams("login_token", app.getUser().getLogin_token())
+//                    .addParams("login_token", app.getUser().getLogin_token())
+                    .addParams("login_token", SPrefUtil.getString(mActivity,"TOKEN",""))
                     .addParams("type", type + "")
                     .addParams("cataId", cardId + "")
                     .addParams("cardId", myCardId + "")
@@ -444,6 +448,11 @@ public class ReleaseFragment extends BaseFragment implements View.OnClickListene
                         public void onResponse(FabuSuccessData fabuSuccessData) {
                             if (fabuSuccessData != null) {
                                 MyUtils.showToast(mActivity, fabuSuccessData.getErrmsg());
+                                if(fabuSuccessData.getErrcode()==40001){
+                                    ActivityUtil.exitAll();
+                                    ActivityUtil.toLogin(mActivity);
+                                    return;
+                                }
                                 if (fabuSuccessData.getErrcode() == 1) {
                                     cleanData();
                                     if (release_type == 1) {
@@ -475,7 +484,7 @@ public class ReleaseFragment extends BaseFragment implements View.OnClickListene
                             }
                         }
                     });
-        }
+//        }
     }
 
     /**
@@ -632,13 +641,14 @@ public class ReleaseFragment extends BaseFragment implements View.OnClickListene
         if (release_type == 2) {//群组二维码
             url = LHHttpUrl.UPLOADQRCODE_URL;
         }
-        if(app!=null&&app.getUser()!=null&&!TextUtils.isEmpty(app.getUser().getLogin_token())) {
+//        if(app!=null&&app.getUser()!=null&&!TextUtils.isEmpty(app.getUser().getLogin_token())) {
             OkHttpUtils
                     .post()
                     .tag(this)
                     .url(url)
                     .addFile("pic", "erweima.png", iconFile)
-                    .addParams("login_token", app.getUser().getLogin_token())
+//                    .addParams("login_token", app.getUser().getLogin_token())
+                    .addParams("login_token", SPrefUtil.getString(mActivity,"TOKEN",""))
                     .build()
                     .execute(new UpEWMCallback() {
                         @Override
@@ -652,6 +662,11 @@ public class ReleaseFragment extends BaseFragment implements View.OnClickListene
                         public void onResponse(UpEWMData mData) {
                             MyUtils.dismssDialog();
                             MyUtils.showToast(mActivity, mData.getErrmsg());
+                            if(mData.getErrcode()==40001){
+                                ActivityUtil.exitAll();
+                                ActivityUtil.toLogin(mActivity);
+                                return;
+                            }
                             if (mData.getErrcode() == 1) {
                                 myCardId = mData.getData().getCardId();
                                 MyUtils.Loge(TAG, "myCardId:" + myCardId);
@@ -661,6 +676,6 @@ public class ReleaseFragment extends BaseFragment implements View.OnClickListene
                             }
                         }
                     });
-        }
+//        }
     }
 }

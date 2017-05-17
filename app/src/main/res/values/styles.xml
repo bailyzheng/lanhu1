@@ -82,4 +82,13 @@
         <item name="android:button">@null</item>
         <item name="android:gravity">center</item>
     </style>
+    <!--屏蔽白屏启动-->
+    <style name="StartTheme" parent="AppTheme">
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowBackground">@mipmap/ic_splash</item>
+        <item name="android:windowIsTranslucent">false</item>
+    </style>
 </resources>

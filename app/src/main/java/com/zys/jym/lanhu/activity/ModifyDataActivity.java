@@ -20,6 +20,7 @@ import com.zys.jym.lanhu.utils.ActivityUtil;
 import com.zys.jym.lanhu.utils.LHHttpUrl;
 import com.zys.jym.lanhu.utils.MediaUtil;
 import com.zys.jym.lanhu.utils.MyUtils;
+import com.zys.jym.lanhu.utils.SPrefUtil;
 import com.zys.jym.lanhu.view.CircleImageView;
 
 import java.io.File;
@@ -130,13 +131,14 @@ public class ModifyDataActivity extends BaseActivity implements View.OnClickList
 
     private void postIcon(File iconFile, final Intent data) {
         MyUtils.showDialog(ModifyDataActivity.this, "正在上传头像...");
-        if(getApplicationContext()!=null&&getApplicationContext().getUser()!=null&&!TextUtils.isEmpty(getApplicationContext().getUser().getLogin_token())) {
+//        if(getApplicationContext()!=null&&getApplicationContext().getUser()!=null&&!TextUtils.isEmpty(getApplicationContext().getUser().getLogin_token())) {
             OkHttpUtils
                     .post()
                     .tag(this)
                     .url(LHHttpUrl.MODIFYHEADURL_URL)
                     .addFile("pic", "photo.png", iconFile)
-                    .addParams("login_token", getApplicationContext().getUser().getLogin_token())
+//                    .addParams("login_token", getApplicationContext().getUser().getLogin_token())
+                    .addParams("login_token", SPrefUtil.getString(ModifyDataActivity.this,"TOKEN",""))
                     .build()
                     .execute(new UpHeadImgCallback() {
                         @Override
@@ -151,6 +153,11 @@ public class ModifyDataActivity extends BaseActivity implements View.OnClickList
                             MyUtils.dismssDialog();
                             MyUtils.Loge(TAG, "请求成功：mData=" + mData.toString());
                             MyUtils.showToast(ModifyDataActivity.this, mData.errmsg);
+                            if(mData.errcode==40001){
+                                ActivityUtil.exitAll();
+                                ActivityUtil.toLogin(ModifyDataActivity.this);
+                                return;
+                            }
                             if (mData.errcode == 1) {
                                 getApplicationContext().getUser().setHeadurl(mData.getData().getHeadurl());
                                 iv_head.setImageURI(data.getData());
@@ -164,7 +171,7 @@ public class ModifyDataActivity extends BaseActivity implements View.OnClickList
                             }
                         }
                     });
-        }
+//        }
 
 
     }

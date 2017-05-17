@@ -108,14 +108,19 @@ public class CardDetailsActivity extends BaseActivity implements View.OnClickLis
                     @Override
                     public void onError(Call call, Exception e) {
                         MyUtils.dismssDialog();
-                        MyUtils.Loge(TAG, "请求失败：call=" + call.toString() + "--e=" + e.toString());
+//                        MyUtils.Loge(TAG, "请求失败：call=" + call.toString() + "--e=" + e.toString());
                         MyUtils.showToast(CardDetailsActivity.this, "连接服务器失败，请稍后再试");
                     }
 
                     @Override
                     public void onResponse(CardDetailData mData) {
                         MyUtils.dismssDialog();
-                        MyUtils.Loge(TAG, "请求成功：mData=" + mData.toString());
+//                        MyUtils.Loge(TAG, "请求成功：mData=" + mData.toString());
+                        if(mData.getErrcode()==40001){
+                            ActivityUtil.exitAll();
+                            ActivityUtil.toLogin(CardDetailsActivity.this);
+                            return;
+                        }
                         if (mData.getErrcode() == 1) {
                             if (mData!=null&&mData.getData()!=null&&mData.getData().getHeadurl()!=null){
                                 Picasso.with(CardDetailsActivity.this)

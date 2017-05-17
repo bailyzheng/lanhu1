@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zys.jym.lanhu.R;
+import com.zys.jym.lanhu.activity.ComplaintActivity;
 import com.zys.jym.lanhu.activity.DHZDActivity;
 import com.zys.jym.lanhu.activity.HBStreamActivity;
 import com.zys.jym.lanhu.activity.KeFu2Activity;
@@ -29,6 +30,7 @@ import com.zys.jym.lanhu.bean.GetPurseData;
 import com.zys.jym.lanhu.bean.PurseData;
 import com.zys.jym.lanhu.fragment.BaseFragment;
 import com.zys.jym.lanhu.httpcallback.GetPurseCallback;
+import com.zys.jym.lanhu.utils.ActivityUtil;
 import com.zys.jym.lanhu.utils.LHHttpUrl;
 import com.zys.jym.lanhu.utils.MyUtils;
 import com.zys.jym.lanhu.utils.RequestCode;
@@ -156,11 +158,12 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
      * 获取账户信息
      */
     private void getCount() {
-        if(app!=null&&app.getUser()!=null&&!TextUtils.isEmpty(app.getUser().getLogin_token())) {
+//        if(app!=null&&app.getUser()!=null&&!TextUtils.isEmpty(app.getUser().getLogin_token())) {
             OkHttpUtils
                     .post()
                     .url(LHHttpUrl.GETPURSEDATA_URL)
-                    .addParams("login_token", app.getUser().getLogin_token())
+//                    .addParams("login_token", app.getUser().getLogin_token())
+                    .addParams("login_token", SPrefUtil.getString(mActivity,"TOKEN",""))
                     .build()
                     .execute(new GetPurseCallback() {
                         @Override
@@ -172,6 +175,12 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
                         public void onResponse(GetPurseData mData) {
                             MyUtils.Loge(TAG, "请求成功：mData=" + mData.toString());
                             if (mData != null) {
+                                if(mData.getErrcode()==40001){
+                                    ActivityUtil.exitAll();
+                                    ActivityUtil.toLogin(mActivity);
+                                    return;
+
+                                }
                                 if (mData.getErrcode() == 1) {
                                     MyUtils.Loge(TAG, "user=" + mData.getUserDate() + "，账户信息=" + mData.getUserInfo());
                                     app.setPurseData(mData.getUserDate());
@@ -185,7 +194,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
                             }
                         }
                     });
-        }
+//        }
     }
 
     /**

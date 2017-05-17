@@ -36,6 +36,7 @@ import com.zys.jym.lanhu.utils.DialogOkUtil;
 import com.zys.jym.lanhu.utils.LHHttpUrl;
 import com.zys.jym.lanhu.utils.MySharedPrefrencesUtil;
 import com.zys.jym.lanhu.utils.MyUtils;
+import com.zys.jym.lanhu.utils.SPrefUtil;
 import com.zys.jym.lanhu.utils.ScreenUtil;
 
 import java.util.ArrayList;
@@ -152,13 +153,14 @@ public class ZDActivity extends BaseActivity implements AdapterView.OnItemClickL
 //            MyUtils.showDialog(zda,"加载中...");
 //        }
 //        MyUtils.Loge(TAG, "p=" + mPage + "login_token=" + app.getUser().getLogin_token());
-        if(app!=null&&app.getUser()!=null&&!TextUtils.isEmpty(app.getUser().getLogin_token())) {
+//        if(app!=null&&app.getUser()!=null&&!TextUtils.isEmpty(app.getUser().getLogin_token())) {
             OkHttpUtils
                     .post()
                     .url(LHHttpUrl.MYTOPICLIST_URL)
                     .addParams("p", mPage + "")
                     .addParams("type", type)
-                    .addParams("login_token", app.getUser().getLogin_token())
+//                    .addParams("login_token", app.getUser().getLogin_token())
+                    .addParams("login_token", SPrefUtil.getString(zda,"TOKEN",""))
 //                .addParams("pageSize",1+"")
                     .build()
                     .execute(new MyTopCallback() {
@@ -176,6 +178,11 @@ public class ZDActivity extends BaseActivity implements AdapterView.OnItemClickL
                             srf_ly.setRefreshing(false);
                             MyUtils.dismssDialog();
                             MyUtils.Loge(TAG, "请求成功：mData=" + mData.toString());
+                            if(mData.getErrcode()==40001){
+                                ActivityUtil.exitAll();
+                                ActivityUtil.toLogin(zda);
+                                return;
+                            }
                             if (mData.getErrcode() == 1) {
                                 if (mData.getData().getTopicList().size() != 0) {
                                     lv_zd.setVisibility(View.VISIBLE);
@@ -220,7 +227,7 @@ public class ZDActivity extends BaseActivity implements AdapterView.OnItemClickL
                             }
                         }
                     });
-        }
+//        }
 
 
     }
@@ -274,12 +281,13 @@ public class ZDActivity extends BaseActivity implements AdapterView.OnItemClickL
             return;
         }
         MyUtils.showDialog(zda,"置顶中...");
-        if(app!=null&&app.getUser()!=null&&!TextUtils.isEmpty(app.getUser().getLogin_token())) {
+//        if(app!=null&&app.getUser()!=null&&!TextUtils.isEmpty(app.getUser().getLogin_token())) {
             OkHttpUtils
                     .post()
                     .url(LHHttpUrl.TOPTOPIC_URL)
                     .addParams("id", doItemId)
-                    .addParams("login_token", app.getUser().getLogin_token())
+//                    .addParams("login_token", app.getUser().getLogin_token())
+                    .addParams("login_token", SPrefUtil.getString(zda,"TOKEN",""))
                     .addParams("num", zdNum + "")
                     .build()
                     .execute(new RegisterCallback() {
@@ -294,6 +302,11 @@ public class ZDActivity extends BaseActivity implements AdapterView.OnItemClickL
                         public void onResponse(RegisterData mData) {
                             MyUtils.dismssDialog();
                             MyUtils.Loge(TAG, "请求成功：mData=" + mData.toString());
+                            if(mData.errcode==40001){
+                                ActivityUtil.exitAll();
+                                ActivityUtil.toLogin(zda);
+                                return;
+                            }
                             if (mData.errcode == 1) {
                                 MyUtils.showToast(zda, "置顶成功!");
                                 tv_s_zdnum.setText("您当前剩余" + (MyUtils.Str2Int(app.getPurseData().getTopbalance()) - zdNum) + "次置顶");
@@ -306,18 +319,19 @@ public class ZDActivity extends BaseActivity implements AdapterView.OnItemClickL
                             }
                         }
                     });
-        }
+//        }
 
     }
 
     private static void doZDSX() {
         MyUtils.showDialog(zda,"刷新中...");
-        if(app!=null&&app.getUser()!=null&&!TextUtils.isEmpty(app.getUser().getLogin_token())) {
+//        if(app!=null&&app.getUser()!=null&&!TextUtils.isEmpty(app.getUser().getLogin_token())) {
             OkHttpUtils
                     .post()
                     .url(LHHttpUrl.AUTOREFRESH_URL)
                     .addParams("id", doItemId)
-                    .addParams("login_token", app.getUser().getLogin_token())
+//                    .addParams("login_token", app.getUser().getLogin_token())
+                    .addParams("login_token", SPrefUtil.getString(zda,"TOKEN",""))
                     .build()
                     .execute(new RegisterCallback() {
                         @Override
@@ -331,7 +345,11 @@ public class ZDActivity extends BaseActivity implements AdapterView.OnItemClickL
                         public void onResponse(RegisterData mData) {
                             MyUtils.dismssDialog();
                             MyUtils.Loge(TAG, "请求成功：mData=" + mData.toString());
-
+                            if(mData.errcode==40001){
+                                ActivityUtil.exitAll();
+                                ActivityUtil.toLogin(zda);
+                                return;
+                            }
                             if (mData.errcode == 1) {
                                 MyUtils.showToast(zda, "自动刷新成功!");
                                 page = 1;
@@ -342,19 +360,20 @@ public class ZDActivity extends BaseActivity implements AdapterView.OnItemClickL
                             }
                         }
                     });
-        }
+//        }
     }
 
     //手动刷新
     public static void itemSDSX(String id){
 
         MyUtils.showDialog(zda,"刷新中...");
-        if(app!=null&&app.getUser()!=null&&!TextUtils.isEmpty(app.getUser().getLogin_token())) {
+//        if(app!=null&&app.getUser()!=null&&!TextUtils.isEmpty(app.getUser().getLogin_token())) {
             OkHttpUtils
                     .post()
                     .url(LHHttpUrl.HANDREFRESH_URL)
                     .addParams("id", id)
-                    .addParams("login_token", app.getUser().getLogin_token())
+//                    .addParams("login_token", app.getUser().getLogin_token())
+                    .addParams("login_token", SPrefUtil.getString(zda,"TOKEN",""))
                     .build()
                     .execute(new RegisterCallback() {
                         @Override
@@ -368,6 +387,11 @@ public class ZDActivity extends BaseActivity implements AdapterView.OnItemClickL
                         public void onResponse(RegisterData mData) {
                             MyUtils.dismssDialog();
                             MyUtils.Loge(TAG, "请求成功：mData=" + mData.toString());
+                            if(mData.errcode==40001){
+                                ActivityUtil.exitAll();
+                                ActivityUtil.toLogin(zda);
+                                return;
+                            }
                             if (mData.errcode == 1) {
                                 MyUtils.showToast(zda, "手动刷新成功!");
                                 MySharedPrefrencesUtil.setParam(zda, "sdsx_time", System.currentTimeMillis() + 180 * 1000);
@@ -379,7 +403,7 @@ public class ZDActivity extends BaseActivity implements AdapterView.OnItemClickL
                             }
                         }
                     });
-        }
+//        }
     }
     //删除
     public static void itemDelete(final String id){
@@ -387,12 +411,13 @@ public class ZDActivity extends BaseActivity implements AdapterView.OnItemClickL
             @Override
             public void onOk() {
                 MyUtils.showDialog(zda,"删除中...");
-                if(app!=null&&app.getUser()!=null&&!TextUtils.isEmpty(app.getUser().getLogin_token())) {
+//                if(app!=null&&app.getUser()!=null&&!TextUtils.isEmpty(app.getUser().getLogin_token())) {
                     OkHttpUtils
                             .post()
                             .url(LHHttpUrl.DELTOPIC_URL)
                             .addParams("id", id)
-                            .addParams("login_token", app.getUser().getLogin_token())
+//                            .addParams("login_token", app.getUser().getLogin_token())
+                            .addParams("login_token", SPrefUtil.getString(zda,"TOKEN",""))
                             .build()
                             .execute(new RegisterCallback() {
                                 @Override
@@ -406,6 +431,11 @@ public class ZDActivity extends BaseActivity implements AdapterView.OnItemClickL
                                 public void onResponse(RegisterData mData) {
                                     MyUtils.dismssDialog();
                                     MyUtils.Loge(TAG, "请求成功：mData=" + mData.toString());
+                                    if(mData.errcode==40001){
+                                        ActivityUtil.exitAll();
+                                        ActivityUtil.toLogin(zda);
+                                        return;
+                                    }
                                     if (mData.errcode == 1) {
                                         MyUtils.showToast(zda, "删除成功!");
 //                                    GroupPager.gHaveData=false;
@@ -418,7 +448,7 @@ public class ZDActivity extends BaseActivity implements AdapterView.OnItemClickL
                                     }
                                 }
                             });
-                }
+//                }
             }
 
             @Override

@@ -16,6 +16,7 @@ import com.zys.jym.lanhu.httpcallback.LoginCallback;
 import com.zys.jym.lanhu.utils.ActivityUtil;
 import com.zys.jym.lanhu.utils.LHHttpUrl;
 import com.zys.jym.lanhu.utils.MyUtils;
+import com.zys.jym.lanhu.utils.SPrefUtil;
 
 import okhttp3.Call;
 
@@ -79,12 +80,13 @@ public class ModifyDescribeActivity extends BaseActivity implements View.OnClick
 
     private void postData() {
         MyUtils.showDialog(ModifyDescribeActivity.this, "正在修改...");
-        if(getApplicationContext()!=null&&getApplicationContext().getUser()!=null&&!TextUtils.isEmpty(getApplicationContext().getUser().getLogin_token())) {
+//        if(getApplicationContext()!=null&&getApplicationContext().getUser()!=null&&!TextUtils.isEmpty(getApplicationContext().getUser().getLogin_token())) {
             OkHttpUtils
                     .post()
                     .tag(this)
                     .url(LHHttpUrl.MODIFYINFO_URL)
-                    .addParams("login_token", getApplicationContext().getUser().getLogin_token())
+//                    .addParams("login_token", getApplicationContext().getUser().getLogin_token())
+                    .addParams("login_token", SPrefUtil.getString(ModifyDescribeActivity.this,"TOKEN",""))
                     .addParams("type", "2")
                     .addParams("info", et_describe.getText().toString().trim())
                     .build()
@@ -101,13 +103,18 @@ public class ModifyDescribeActivity extends BaseActivity implements View.OnClick
                             MyUtils.dismssDialog();
                             MyUtils.Loge(TAG, "请求成功：mData=" + mData.toString());
                             MyUtils.showToast(ModifyDescribeActivity.this, mData.errmsg);
+                            if(mData.errcode==40001){
+                                ActivityUtil.exitAll();
+                                ActivityUtil.toLogin(ModifyDescribeActivity.this);
+                                return;
+                            }
                             if (mData.errcode == 1) {
 //                            finish();
                                 getApplicationContext().getUser().setDescribe(et_describe.getText().toString().trim());
                             }
                         }
                     });
-        }
+//        }
 
     }
         @Override

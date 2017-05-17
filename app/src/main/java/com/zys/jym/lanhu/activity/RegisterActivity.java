@@ -115,6 +115,11 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                     public void onResponse(SMSData mData) {
                         MyUtils.dismssDialog();
                         MyUtils.Loge(TAG, "请求成功：mData=" + mData.toString());
+                        if(mData.errcode==40001){
+                            ActivityUtil.exitAll();
+                            ActivityUtil.toLogin(RegisterActivity.this);
+                            return;
+                        }
                         if (mData.errcode==1){
                             Intent in=new Intent(RegisterActivity.this,Register2Activity.class);
                             in.putExtra("phone",et_phone.getText().toString());

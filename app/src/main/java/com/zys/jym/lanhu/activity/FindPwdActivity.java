@@ -131,6 +131,11 @@ public class FindPwdActivity extends BaseActivity implements View.OnClickListene
                     public void onResponse(SMSData mData) {
                         MyUtils.dismssDialog();
                         MyUtils.Loge(TAG, "请求成功：mData=" + mData.toString());
+                        if(mData.errcode==40001){
+                            ActivityUtil.exitAll();
+                            ActivityUtil.toLogin(FindPwdActivity.this);
+                            return;
+                        }
                         if (mData.errcode==1){
                             Intent in=new Intent(FindPwdActivity.this,FindPwd2Activity.class);
                             in.putExtra("phone",et_phone.getText().toString());

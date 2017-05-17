@@ -17,6 +17,7 @@ import com.zys.jym.lanhu.utils.ActivityUtil;
 import com.zys.jym.lanhu.utils.DialogOkUtil;
 import com.zys.jym.lanhu.utils.LHHttpUrl;
 import com.zys.jym.lanhu.utils.MyUtils;
+import com.zys.jym.lanhu.utils.SPrefUtil;
 
 import okhttp3.Call;
 
@@ -73,12 +74,13 @@ public class RedeemCodeActivity extends BaseActivity implements View.OnClickList
 
     private void dh() {
         MyUtils.showDialog(RedeemCodeActivity.this, "兑换中...");
-        if(getApplicationContext()!=null&&getApplicationContext().getUser()!=null&&!TextUtils.isEmpty(getApplicationContext().getUser().getLogin_token())) {
+//        if(getApplicationContext()!=null&&getApplicationContext().getUser()!=null&&!TextUtils.isEmpty(getApplicationContext().getUser().getLogin_token())) {
             OkHttpUtils
                     .post()
                     .tag(this)
                     .url(LHHttpUrl.EXCHANGECODE_URL)
-                    .addParams("login_token", getApplicationContext().getUser().getLogin_token())
+//                    .addParams("login_token", getApplicationContext().getUser().getLogin_token())
+                    .addParams("login_token", SPrefUtil.getString(RedeemCodeActivity.this,"TOKEN",""))
                     .addParams("code", et_dhcode.getText().toString().trim())
                     .build()
                     .execute(new NormalCallback() {
@@ -93,7 +95,11 @@ public class RedeemCodeActivity extends BaseActivity implements View.OnClickList
                         public void onResponse(NormalData mData) {
                             MyUtils.dismssDialog();
                             MyUtils.Loge(TAG, "请求成功：mData=" + mData.toString());
-
+                            if(mData.errcode==40001){
+                                ActivityUtil.exitAll();
+                                ActivityUtil.toLogin(RedeemCodeActivity.this);
+                                return;
+                            }
                             if (mData.getErrcode() == 1) {
                                 Main2Activity.getPurseData(false);
                                 DialogOkUtil.show_Ok_Dialog(RedeemCodeActivity.this, mData.getErrmsg(), new DialogOkUtil.On_OK_ClickListener() {
@@ -111,7 +117,7 @@ public class RedeemCodeActivity extends BaseActivity implements View.OnClickList
                             }
                         }
                     });
-        }
+//        }
 
     }
 

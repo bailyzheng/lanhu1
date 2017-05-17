@@ -76,6 +76,14 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     private void initData() {
         app= getApplicationContext();
         logout= getIntent().getBooleanExtra("logout",false);
+        String phone="";
+        String password="";
+        if(!TextUtils.isEmpty(SPrefUtil.getString(LoginActivity.this,"PHONE",""))&&!TextUtils.isEmpty(SPrefUtil.getString(LoginActivity.this,"PWD",""))){
+            phone=SPrefUtil.getString(LoginActivity.this,"PHONE","");
+            password=SPrefUtil.getString(LoginActivity.this,"PWD","");
+            et_phone.setText(phone);
+            et_pwd.setText(password);
+        }
     }
 
 
@@ -119,6 +127,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
     private void login() {
         MyUtils.showDialog(LoginActivity.this,"登录中...");
+
         OkHttpUtils
                 .post()
                 .tag(this)
@@ -137,11 +146,12 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                     @Override
                     public void onResponse(LoginData mData) {
                         MyUtils.dismssDialog();
-                        MyUtils.Loge(TAG, "请求成功：mData=" + mData.toString());
+                        MyUtils.Loge(TAG, "登陆成功----请求成功：mData=" + mData.toString());
                         if (mData.errcode==1){
 //                            MyUtils.showToast(LoginActivity.this,"登陆成功");
                             SPrefUtil.setString(LoginActivity.this, "PHONE", et_phone.getText().toString().trim());
                             SPrefUtil.setString(LoginActivity.this,"PWD", et_pwd.getText().toString().trim());
+                            SPrefUtil.setString(LoginActivity.this,"TOKEN",mData.getData().getLogin_token());
                             app.setIsLogin(true);
                             app.setUser(mData.data);
                             if (logout){

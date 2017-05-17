@@ -10,7 +10,7 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:scaleType="fitXY"
-        android:src="@mipmap/ic_splash" />
+        android:src="@mipmap/ic_app_code" />
 
 
 </RelativeLayout>

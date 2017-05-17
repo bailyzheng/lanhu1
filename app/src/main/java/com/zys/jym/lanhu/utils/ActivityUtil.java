@@ -1,6 +1,10 @@
 package com.zys.jym.lanhu.utils;
 
 import android.app.Activity;
+import android.content.Intent;
+
+import com.zys.jym.lanhu.activity.AboutUsActivity;
+import com.zys.jym.lanhu.activity.LoginActivity;
 
 import java.util.ArrayList;
 
@@ -35,5 +39,8 @@ public class ActivityUtil {
 //		MyUtils.Loge(TAG,"最后ActivityName="+mActivities.get(mActivities.size()-1).toString());
 		return mActivities.get(mActivities.size()-1).toString();
 
+	}
+	public static void toLogin(Activity activity){
+		activity.startActivity(new Intent(activity,LoginActivity.class));
 	}
 }

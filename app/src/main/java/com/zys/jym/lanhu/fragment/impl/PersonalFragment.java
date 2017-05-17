@@ -28,6 +28,7 @@ import android.widget.Toast;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zys.jym.lanhu.R;
 import com.zys.jym.lanhu.activity.CardDetailsActivity;
+import com.zys.jym.lanhu.activity.ComplaintActivity;
 import com.zys.jym.lanhu.activity.Main2Activity;
 import com.zys.jym.lanhu.activity.SelectP2Activity;
 import com.zys.jym.lanhu.activity.ZDActivity;
@@ -36,6 +37,7 @@ import com.zys.jym.lanhu.bean.MyTopData;
 import com.zys.jym.lanhu.bean.TopData;
 import com.zys.jym.lanhu.fragment.BaseFragment;
 import com.zys.jym.lanhu.httpcallback.MyTopCallback;
+import com.zys.jym.lanhu.utils.ActivityUtil;
 import com.zys.jym.lanhu.utils.LHHttpUrl;
 import com.zys.jym.lanhu.utils.MyUtils;
 import com.zys.jym.lanhu.utils.RequestCode;
@@ -354,6 +356,11 @@ public class PersonalFragment extends BaseFragment implements View.OnClickListen
                         MyUtils.Loge("aaaaa", "请求成功：toplist.size()---" + mData.getData().getTopicList().size());
                         keyWord = "";
                         search_editText.setText("");
+                        if(mData.getErrcode()==40001){
+                            ActivityUtil.exitAll();
+                            ActivityUtil.toLogin(mActivity);
+                            return;
+                        }
                         if (mData.getErrcode()==1){
                             if (mData.getData().getTopicList().size()!=0){
                                 if (mPage == 1) {
