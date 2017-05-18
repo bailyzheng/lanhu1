@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -82,14 +83,14 @@ public class PersonalRvAdapter extends RecyclerView.Adapter <PersonalRvAdapter.M
 
             holder.tv_title.setText(data.getTitle());
             holder.tv_describe.setText(data.getDescribe());
-            if (MyUtils.Str2Int(data.getViprest())<0){
+            if (!TextUtils.isEmpty(data.getViprest())&&MyUtils.Str2Int(data.getViprest())<0){
                 holder.tv_title.setTextColor(context.getResources().getColor(R.color.black));
                 holder.iv_vip.setVisibility(View.GONE);
             }else {
                 holder.tv_title.setTextColor(context.getResources().getColor(R.color.red));
                 holder.iv_vip.setVisibility(View.VISIBLE);
             }
-            if (MyUtils.Str2Int(data.getToprest())<0){
+            if (!TextUtils.isEmpty(data.getToprest())&&MyUtils.Str2Int(data.getToprest())<0){
                 holder.iv_zhiding.setVisibility(View.GONE);
             }else {
                 holder.iv_zhiding.setVisibility(View.VISIBLE);

@@ -148,6 +148,7 @@ public class MyUtils {
      */
     public static int Str2Int(String str) {
 //        int i = (int)Double.parseDouble(str);
+        //应该先判断 字符串是不是空
         return Integer.valueOf(str).intValue();
     }
     public static int float2Int(float f) {

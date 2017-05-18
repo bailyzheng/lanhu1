@@ -109,7 +109,7 @@ public class OpenVipActivity extends BaseActivity implements View.OnClickListene
 //                    getApplicationContext().getUser().getViptime(),null))+"到期");
 //        }
         if (getApplicationContext().getPurseData()!=null) {
-            if (MyUtils.Str2Int(getApplicationContext().getPurseData().getViprest()) > 0) {
+            if (!TextUtils.isEmpty(getApplicationContext().getPurseData().getViprest())&&MyUtils.Str2Int(getApplicationContext().getPurseData().getViprest()) > 0) {
                 tv_nickname.setTextColor(getResources().getColor(R.color.red));
                 tv_lasttime.setText(MyUtils.Intercept_YMDHM(TimeUtil.timeStamp2Date(
                         getApplicationContext().getUser().getViptime(), null)) + "到期");

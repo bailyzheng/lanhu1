@@ -91,6 +91,7 @@ public class Main2Activity extends BaseActivity implements View.OnClickListener 
     public static Intent mdata = null;
     private static StringBuilder sb = new StringBuilder();
     protected static Map<String, FragmentContainer> fragmentClassMap = new HashMap<String, FragmentContainer>();
+    List<Fragment> fragments = new ArrayList<>();
 
     static {
         fragmentClassMap.put("home", new FragmentContainer(R.id.rb_home, HomeFragment.class));
@@ -670,7 +671,6 @@ public class Main2Activity extends BaseActivity implements View.OnClickListener 
 
     public Fragment getVisibleFragment() {
         FragmentManager fragmentManager = Main2Activity.this.getSupportFragmentManager();
-        List<Fragment> fragments = new ArrayList<>();
         fragments = fragmentManager.getFragments();
         if (fragments.size() > 0) {
             for (Fragment fragment : fragments) {

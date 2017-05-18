@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -80,12 +81,13 @@ public class CardDetailsActivity extends BaseActivity implements View.OnClickLis
         mData = (TopData) getIntent().getSerializableExtra("cardDetail");
         getData(mData.getId());
         if (!getIntent().getBooleanExtra("FromTop", false)) {
-            if (MyUtils.Str2Int(mData.getViprest()) > 0) {
+
+            if (!TextUtils.isEmpty(mData.getViprest())&&MyUtils.Str2Int(mData.getViprest()) > 0) {
                 tv_nickname.setTextColor(getResources().getColor(R.color.red));
                 tv_title.setTextColor(getResources().getColor(R.color.red));
             }
         } else {
-            if (getApplicationContext().getPurseData() != null &&
+            if (getApplicationContext().getPurseData() != null &&!TextUtils.isEmpty(getApplicationContext().getPurseData().getViprest())&&
                     MyUtils.Str2Int(getApplicationContext().getPurseData().getViprest()) > 0) {
                 tv_nickname.setTextColor(getResources().getColor(R.color.red));
                 tv_title.setTextColor(getResources().getColor(R.color.red));
@@ -116,13 +118,13 @@ public class CardDetailsActivity extends BaseActivity implements View.OnClickLis
                     public void onResponse(CardDetailData mData) {
                         MyUtils.dismssDialog();
 //                        MyUtils.Loge(TAG, "请求成功：mData=" + mData.toString());
-                        if(mData.getErrcode()==40001){
+                        if (mData.getErrcode() == 40001) {
                             ActivityUtil.exitAll();
                             ActivityUtil.toLogin(CardDetailsActivity.this);
                             return;
                         }
                         if (mData.getErrcode() == 1) {
-                            if (mData!=null&&mData.getData()!=null&&mData.getData().getHeadurl()!=null){
+                            if (mData != null && mData.getData() != null && mData.getData().getHeadurl() != null) {
                                 Picasso.with(CardDetailsActivity.this)
                                         .load(LHHttpUrl.IMG_URL + mData.getData().getHeadurl())
                                         .into(iv_head);
@@ -151,8 +153,8 @@ public class CardDetailsActivity extends BaseActivity implements View.OnClickLis
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tv_com:
-                if (!getApplicationContext().getIsLogin()){
-                    Intent in =new Intent(CardDetailsActivity.this,LoginActivity.class);
+                if (!getApplicationContext().getIsLogin()) {
+                    Intent in = new Intent(CardDetailsActivity.this, LoginActivity.class);
                     startActivity(in);
                     return;
                 }
@@ -171,7 +173,7 @@ public class CardDetailsActivity extends BaseActivity implements View.OnClickLis
         SavePicUtil.SavePic(CardDetailsActivity.this, mData.getImgurl(), 0, new SavePicUtil.On_Save_ClickListener() {
             @Override
             public void onSuccess(File file, int nextPosition) {
-                SaveCodeUtil.insertCode(CardDetailsActivity.this,mData.getId());
+                SaveCodeUtil.insertCode(CardDetailsActivity.this, mData.getId());
                 MyUtils.showToast(CardDetailsActivity.this, "已保存至" +
                         Environment.getExternalStorageDirectory().getAbsolutePath() + "/lh/CodeImg/"
                         + file.getName());
@@ -194,7 +196,7 @@ public class CardDetailsActivity extends BaseActivity implements View.OnClickLis
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         // 调用EasyPermissions的onRequestPermissionsResult方法，参数和系统方法保持一致，然后就不要关心具体的权限申请代码了
 //        save(requestCode,grantResults);
-        switch (requestCode){
+        switch (requestCode) {
             case 0x1:
                 if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     toSave();

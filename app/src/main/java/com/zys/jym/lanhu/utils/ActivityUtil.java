@@ -41,6 +41,8 @@ public class ActivityUtil {
 
 	}
 	public static void toLogin(Activity activity){
-		activity.startActivity(new Intent(activity,LoginActivity.class));
+		Intent intent=new Intent(activity,LoginActivity.class);
+		intent.putExtra("logout",true);
+		activity.startActivity(intent);
 	}
 }

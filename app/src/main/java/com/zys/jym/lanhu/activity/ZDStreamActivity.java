@@ -20,6 +20,7 @@ import com.zys.jym.lanhu.httpcallback.StreamCallback;
 import com.zys.jym.lanhu.utils.ActivityUtil;
 import com.zys.jym.lanhu.utils.LHHttpUrl;
 import com.zys.jym.lanhu.utils.MyUtils;
+import com.zys.jym.lanhu.utils.SPrefUtil;
 import com.zys.jym.lanhu.utils.ScreenUtil;
 
 import java.util.ArrayList;
@@ -84,12 +85,14 @@ public class ZDStreamActivity extends BaseActivity implements SwipeRefreshLayout
         if (isV){
             MyUtils.showDialog(ZDStreamActivity.this,"加载中...");
         }
-        if(getApplicationContext()!=null&&getApplicationContext().getUser()!=null&&!TextUtils.isEmpty(getApplicationContext().getUser().getLogin_token())) {
+//        if(getApplicationContext()!=null&&getApplicationContext().getUser()!=null&&!TextUtils.isEmpty(getApplicationContext().getUser().getLogin_token())) {
+        if(!TextUtils.isEmpty(SPrefUtil.getString(ZDStreamActivity.this,"TOKEN",""))){
             OkHttpUtils
                     .post()
                     .tag(this)
                     .url(LHHttpUrl.GETTOPLOG_URL)
-                    .addParams("login_token", getApplicationContext().getUser().getLogin_token())
+//                    .addParams("login_token", getApplicationContext().getUser().getLogin_token())
+                    .addParams("login_token",SPrefUtil.getString(ZDStreamActivity.this,"TOKEN",""))
                     .addParams("p", mPage + "")
                     .build()
                     .execute(new StreamCallback() {

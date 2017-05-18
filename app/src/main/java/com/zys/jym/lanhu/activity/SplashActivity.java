@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.Window;
 import android.view.WindowManager;
 
@@ -131,6 +132,7 @@ public class SplashActivity extends BaseActivity {
 //                        if(app.getPurseData()!=null&&Long.parseLong(app.getPurseData().getViprest()) > 0){
 //                            MySharedPrefrencesUtil.setParam(SplashActivity.this, "isAllowAdd", "open");
 //                        }
+                        SPrefUtil.setString(SplashActivity.this,"TOKEN",mData.getData().getLogin_token());
                         jumpActivity();
                     } else {
                         app.setIsLogin(false);
@@ -219,4 +221,11 @@ public class SplashActivity extends BaseActivity {
         ActivityUtil.delect(this);
     }
 
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode==event.KEYCODE_BACK){
+            return false;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
 }
