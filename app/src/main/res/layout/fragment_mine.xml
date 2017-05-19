@@ -513,7 +513,7 @@
                 android:layout_centerVertical="true"
                 android:drawablePadding="5dp"
                 android:drawableRight="@mipmap/icon_enter"
-                android:text="免费检测僵尸粉"
+                android:text="检测僵尸粉"
                 android:textColor="#EB6100"
                 android:textSize="14sp" />
         </RelativeLayout>

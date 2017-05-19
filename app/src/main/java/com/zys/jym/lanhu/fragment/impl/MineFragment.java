@@ -185,9 +185,11 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
                             if (mData.getErrcode() == 1) {
 //                                    MyUtils.Loge(TAG, "user=" + mData.getUserDate() + "，账户信息=" + mData.getUserInfo());
                                 if (mData.getUserDate() != null && mData.getUserInfo() != null && !TextUtils.isEmpty(mData.getUserInfo().getViptime()) && !TextUtils.isEmpty(mData.getUserDate().getViprest())) {
-                                    app.setPurseData(mData.getUserDate());
-                                    app.getUser().setViptime(mData.getUserInfo().getViptime());
-                                    app.getPurseData().setViprest(mData.getUserDate().getViprest());
+                                    if(app!=null&&app.getUser()!=null&&app.getPurseData()!=null) {
+                                        app.setPurseData(mData.getUserDate());
+                                        app.getUser().setViptime(mData.getUserInfo().getViptime());
+                                        app.getPurseData().setViprest(mData.getUserDate().getViprest());
+                                    }
                                     setviews(mData);
                                 }
                             }

@@ -138,9 +138,9 @@ public class ShareActivity extends BaseActivity implements View.OnClickListener 
         webpageObject.webpageUrl = getApplicationContext().getUser().getAppurl();  //http://58.216.6.12/imtt.dd.qq.com/16891/A070E8F02623900187C8A12EBAFC618A.apk?mkey=58f1f4ddad724b41&f=6d17&c=0&fsname=com.zys.jym.lanhu_2.2_10.apk&csr=1bbd&p=.apk
 //        webpageObject.webpageUrl ="http://58.216.6.12/imtt.dd.qq.com/16891/A070E8F02623900187C8A12EBAFC618A.apk?mkey=58f1f4ddad724b41&f=6d17&c=0&fsname=com.zys.jym.lanhu_2.2_10.apk&csr=1bbd&p=.apk";
         WXMediaMessage message = new WXMediaMessage(webpageObject);
-        message.title = "这个软件加粉不要钱，还免费检测僵尸粉哦！我的邀请码：" + getApplicationContext().getUser().getRegcode();//微商必备神器免费爆粉软件，蓝狐微商。邀请码：
+        message.title = "这个软件加粉不要钱，还能自动删除僵尸粉。我的邀请码：" + getApplicationContext().getUser().getRegcode();//微商必备神器免费爆粉软件，蓝狐微商。邀请码：
         if (type == 2) {
-            message.description = "每天送120个全国散客，月加3600人，点通过点到手软，点击免费下载";//加人，加群，被加，微商必备神器！邀请好友免费送置顶，注册就可免费加粉
+            message.description = "每天领取120个散客人脉，月领3600人，点击免费领取";//加人，加群，被加，微商必备神器！邀请好友免费送置顶，注册就可免费加粉
         }
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_share_logo);
         Bitmap thumbBmp = Bitmap.createScaledBitmap(bitmap, 120, 120, true);
