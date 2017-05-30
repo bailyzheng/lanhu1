@@ -256,7 +256,7 @@ public class ZDActivity extends BaseActivity implements AdapterView.OnItemClickL
     public static void itemZDSX(String id){
         doItemId=id;
         //判断是否是蓝狐会员
-        if(Long.parseLong(app.getPurseData().getViprest())<=0){
+        if(app!=null&&app.getPurseData()!=null&&Long.parseLong(app.getPurseData().getViprest())<=0){
             DialogOkUtil.show_Ok_Dialog(zda, "很遗憾，您还不是蓝狐会员，该特权只有蓝狐会员才能使用", new DialogOkUtil.On_OK_ClickListener() {
                 @Override
                 public void onOk() {

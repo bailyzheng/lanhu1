@@ -7,6 +7,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.GestureDetector;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -81,7 +82,9 @@ public class GroupFragment extends BaseFragment implements AdapterView.OnItemCli
                     c = msg.getData().getString("c");
                     p_id = msg.getData().getString("p_id");
                     c_id = msg.getData().getString("c_id");
-                    tv_dq.setText(p+"-"+c);
+                    if(!TextUtils.isEmpty(p)&&!TextUtils.isEmpty(c)) {
+                        tv_dq.setText(p + "-" + c);
+                    }
                     page=1;
                     getData(page);
                     break;

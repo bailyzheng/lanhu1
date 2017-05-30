@@ -89,7 +89,7 @@ public class OpenVipActivity extends BaseActivity implements View.OnClickListene
     private void initData() {
         getApplicationContext().setPayActivity(2);
         setBackg(1);
-        if (!TextUtils.isEmpty(getApplicationContext().getUser().getHeadurl())){
+        if (getApplicationContext().getUser()!=null&&!TextUtils.isEmpty(getApplicationContext().getUser().getHeadurl())){
             Picasso.with(OpenVipActivity.this)
                     .load(LHHttpUrl.IMG_URL+getApplicationContext().getUser().getHeadurl())
                     .into(iv_head);

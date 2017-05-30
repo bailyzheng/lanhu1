@@ -972,8 +972,8 @@ public class HomeFragment extends BaseFragment implements AMapLocationListener, 
                 @Override
                 public void run() {
                     for (int i = 0; i < addPhoneList.size(); i++) {
-                        MyUtils.Loge(TAG, "选中的电话号码：" + addPhoneList.get(i));
-                        MyUtils.Loge(TAG, "选中的用户名：" + addNameList.get(i));
+//                        MyUtils.Loge(TAG, "选中的电话号码：" + addPhoneList.get(i));
+//                        MyUtils.Loge(TAG, "选中的用户名：" + addNameList.get(i));
                         LXRUtil.addContacts(mActivity, addNameList.get(i), addPhoneList.get(i), false, addNameList.size(), 1);
                     }
                 }

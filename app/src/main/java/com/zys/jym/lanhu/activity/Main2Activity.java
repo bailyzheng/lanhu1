@@ -659,7 +659,7 @@ public class Main2Activity extends BaseActivity implements View.OnClickListener 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
         Fragment fragment = getVisibleFragment();
-        if (fragment != null) {
+        if (fragment!=null&&fragment != null) {
             if (fragment instanceof PersonalFragment || fragment instanceof GroupFragment) {
                 for (MyOnTouchListener listener : onTouchListeners) {
                     listener.onTouch(ev);
@@ -672,7 +672,7 @@ public class Main2Activity extends BaseActivity implements View.OnClickListener 
     public Fragment getVisibleFragment() {
         FragmentManager fragmentManager = Main2Activity.this.getSupportFragmentManager();
         fragments = fragmentManager.getFragments();
-        if (fragments.size() > 0) {
+        if (fragments!=null&&fragments.size() > 0) {
             for (Fragment fragment : fragments) {
                 if (fragment != null && fragment.isVisible())
                     return fragment;
