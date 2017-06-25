@@ -318,7 +318,7 @@ public class GroupCodeActivity extends BaseActivity implements View.OnClickListe
                         public void onNo() {
 
                         }
-                    }).show();
+                    },"").show();
                 }
 
             }

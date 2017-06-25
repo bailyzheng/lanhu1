@@ -143,7 +143,7 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
                     public void onNo() {
 
                     }
-                }).show();
+                },"").show();
 
                 break;
             case R.id.rl_logout:

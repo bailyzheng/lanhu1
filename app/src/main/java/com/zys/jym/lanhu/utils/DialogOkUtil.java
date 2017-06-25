@@ -21,13 +21,14 @@ public class DialogOkUtil {
      * 帶確定和取消按鈕的对话框
      * @param msg
      */
-    public static Dialog show_OK_NO_Dialog(Activity activity, String msg, final On_OK_N0_ClickListener listener) {
+    public static Dialog show_OK_NO_Dialog(Activity activity, String msg, final On_OK_N0_ClickListener listener,String title) {
         Dialog dialog=null;
         LayoutInflater inflater = LayoutInflater.from(activity);
         View v = inflater.inflate(R.layout.view_delete_dialog, null);// 得到加载view
         final Button btn_ok= (Button) v.findViewById(R.id.btn_ok);
         final Button btn_no= (Button) v.findViewById(R.id.btn_no);
         final TextView tv_msg= (TextView) v.findViewById(R.id.tv_msg);
+        final TextView tv_dialog_title=(TextView)v.findViewById(R.id.tv_dialog_title);//标题
         dialog = new Dialog(activity, R.style.custom_dialog);// 创建自定义样式dialog
         dialog.setCanceledOnTouchOutside(false);
         dialog.setCancelable(false);
@@ -36,6 +37,11 @@ public class DialogOkUtil {
             tv_msg.setText(msg);// 设置加载信息
         }
         final Dialog finalDialog = dialog;
+        if(!TextUtils.isEmpty(title)){
+            tv_dialog_title.setText(title);
+        }else{
+            tv_dialog_title.setText("温馨提示");
+        }
         btn_ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -69,13 +75,14 @@ public class DialogOkUtil {
      * @param msg
      * @param listener
      */
-    public static Dialog show_Ok_Dialog(Activity activity, String msg, final On_OK_ClickListener listener) {
+    public static Dialog show_Ok_Dialog(Activity activity, String msg, final On_OK_ClickListener listener,String title) {
         Dialog dialog = null;
         LayoutInflater inflater = LayoutInflater.from(activity);
         View v = inflater.inflate(R.layout.view_dialog, null);// 得到加载view
         final Button btn_ok= (Button) v.findViewById(R.id.btn_ok);
         final TextView tv_msg= (TextView) v.findViewById(R.id.tv_msg);
         final TextView tv_finsh= (TextView) v.findViewById(R.id.tv_finsh);
+        final TextView tv_dialog2_title=(TextView)v.findViewById(R.id.tv_dialog2_title);
         dialog = new Dialog(activity, R.style.custom_dialog);// 创建自定义样式dialog
         dialog.setCanceledOnTouchOutside(false);
         dialog.setCancelable(false);
@@ -85,6 +92,11 @@ public class DialogOkUtil {
         }
 
         final Dialog finalDialog = dialog;
+        if(!TextUtils.isEmpty(title)){
+            tv_dialog2_title.setText(title);
+        }else {
+            tv_dialog2_title.setText("温馨提示");
+        }
         btn_ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

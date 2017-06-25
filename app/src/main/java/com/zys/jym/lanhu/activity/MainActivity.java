@@ -178,7 +178,7 @@ public class MainActivity extends BaseActivity {
                 public void onOk() {
                     Intent intent = new Intent(Settings.ACTION_SETTINGS);startActivity(intent);
                 }
-            }).show();
+            },"").show();
         }else {
             DialogOkUtil.show_OK_NO_Dialog(ma, "当前网络不是Wifi，是否用手机流量下载？", new DialogOkUtil.On_OK_N0_ClickListener() {
                 @Override
@@ -190,7 +190,7 @@ public class MainActivity extends BaseActivity {
                 public void onNo() {
 
                 }
-            }).show();
+            },"").show();
         }
 
     }

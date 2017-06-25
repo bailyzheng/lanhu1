@@ -236,14 +236,14 @@ public class ZDActivity extends BaseActivity implements AdapterView.OnItemClickL
         doItemId=id;
         if (app.getPurseData()!=null){
             if (MyUtils.Str2Int(app.getPurseData().getTopbalance())==0){
-                DialogOkUtil.show_Ok_Dialog(zda, "很遗憾，您的置顶次数不足", new DialogOkUtil.On_OK_ClickListener() {
+                DialogOkUtil.show_Ok_Dialog(zda, "好友通过您的邀请码注册蓝狐,您和好友各获得半小时置顶,在个人中心发起邀请,点击确定,直接兑换置顶.", new DialogOkUtil.On_OK_ClickListener() {
                     @Override
                     public void onOk() {
                         Intent in =new Intent(zda, DHZDActivity.class);
                         zda.startActivity(in);
 
                     }
-                }).show();
+                },"邀请好友,送三天被加,送置顶").show();
             }else {
                 showZDDialog();
             }
@@ -263,7 +263,7 @@ public class ZDActivity extends BaseActivity implements AdapterView.OnItemClickL
                     Intent in =new Intent(zda, OpenVipActivity.class);
                     zda.startActivity(in);
                 }
-            }).show();
+            },"").show();
 
         }else {
             doZDSX();
@@ -271,13 +271,13 @@ public class ZDActivity extends BaseActivity implements AdapterView.OnItemClickL
     }
     private static void doZd() {
         if (MyUtils.Str2Int(app.getPurseData().getTopbalance())<zdNum){
-            DialogOkUtil.show_Ok_Dialog(zda, "很遗憾，您的置顶次数不足", new DialogOkUtil.On_OK_ClickListener() {
+            DialogOkUtil.show_Ok_Dialog(zda, "好友通过您的邀请码注册蓝狐,您和好友各获得半小时置顶,在个人中心发起邀请,点击确定,直接兑换置顶.", new DialogOkUtil.On_OK_ClickListener() {
                 @Override
                 public void onOk() {
                     Intent in =new Intent(zda, DHZDActivity.class);
                     zda.startActivity(in);
                 }
-            }).show();
+            },"邀请好友,送三天被加,送置顶").show();
             return;
         }
         MyUtils.showDialog(zda,"置顶中...");
@@ -455,7 +455,7 @@ public class ZDActivity extends BaseActivity implements AdapterView.OnItemClickL
             public void onNo() {
 
             }
-        }).show();
+        },"").show();
 
 
     }
@@ -557,7 +557,9 @@ public class ZDActivity extends BaseActivity implements AdapterView.OnItemClickL
         }
     }
     public static void setZDNum(){
-        tv_s_zdnum.setText("您当前剩余"+app.getPurseData().getTopbalance()+"次置顶");
+        if(app!=null&&app.getPurseData()!=null&!TextUtils.isEmpty(app.getPurseData().getTopbalance())) {
+            tv_s_zdnum.setText("您当前剩余" + app.getPurseData().getTopbalance() + "次置顶");
+        }
     }
 
 

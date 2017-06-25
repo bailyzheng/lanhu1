@@ -356,7 +356,7 @@ public class ReleasePager extends MainBasePager implements View.OnClickListener 
                                     public void onOk() {
                                         tv_success.setVisibility(View.INVISIBLE);
                                     }
-                                }).show();
+                                },"").show();
                             }
                         }
                     });

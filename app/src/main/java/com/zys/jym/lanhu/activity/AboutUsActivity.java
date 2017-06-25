@@ -170,7 +170,7 @@ public class AboutUsActivity extends BaseActivity implements View.OnClickListene
                 @Override
                 public void onOk() {
                 }
-            }).show();
+            },"").show();
         } else {
             DialogOkUtil.show_OK_NO_Dialog(AboutUsActivity.this, "当前网络不是Wifi，是否用手机流量下载？", new DialogOkUtil.On_OK_N0_ClickListener() {
                 @Override
@@ -182,7 +182,7 @@ public class AboutUsActivity extends BaseActivity implements View.OnClickListene
                 public void onNo() {
 
                 }
-            }).show();
+            },"").show();
         }
 
     }

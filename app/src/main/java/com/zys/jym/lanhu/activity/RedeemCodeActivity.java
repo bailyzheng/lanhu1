@@ -107,13 +107,13 @@ public class RedeemCodeActivity extends BaseActivity implements View.OnClickList
                                     public void onOk() {
                                         finish();
                                     }
-                                }).show();
+                                },"").show();
                             } else {
                                 DialogOkUtil.show_Ok_Dialog(RedeemCodeActivity.this, mData.getErrmsg(), new DialogOkUtil.On_OK_ClickListener() {
                                     @Override
                                     public void onOk() {
                                     }
-                                }).show();
+                                },"").show();
                             }
                         }
                     });

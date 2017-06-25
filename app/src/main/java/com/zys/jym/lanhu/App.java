@@ -121,6 +121,7 @@ public class App extends Application {
     }
 
     private void initUMShare() {
+        PlatformConfig.setQQZone("1105855575", "Ph3pQlYxpe1bqr3q");
         Config.isJumptoAppStore = true;
         UMShareAPI.get(this);
     }

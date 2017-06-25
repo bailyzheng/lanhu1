@@ -169,7 +169,7 @@ public class HomeFragment extends BaseFragment implements AMapLocationListener, 
                     String currentDate = (new SimpleDateFormat("yyyy-MM-dd")).format(new Date());
                     String hcDate = (String) MySharedPrefrencesUtil.getParam(mActivity, "CLEAN_DATE", "");
                     MySharedPrefrencesUtil.setParam(mActivity, "CLEAN_DATE", currentDate);
-                    DialogOkUtil.show_OK_NO_Dialog(mActivity, "导入成功，请打开微信，新的朋友查看", new DialogOkUtil.On_OK_N0_ClickListener() {
+                    DialogOkUtil.show_OK_NO_Dialog(mActivity, "加粉成功后,请打开微信,稍等片刻,等待新的好友出现后,返回蓝狐继续加粉.", new DialogOkUtil.On_OK_N0_ClickListener() {
                         @Override
                         public void onOk() {
                             try {
@@ -188,7 +188,7 @@ public class HomeFragment extends BaseFragment implements AMapLocationListener, 
                         @Override
                         public void onNo() {
                         }
-                    }).show();
+                    },"邀请好友,送三天被加,送置顶").show();
                     for (int i = 0; i < addPhoneList.size(); i++) {
                         sb.append(addPhoneList.get(i) + "^");
                         MyUtils.Loge(TAG, "添加的手机号：" + addPhoneList.get(i));
@@ -516,7 +516,7 @@ public class HomeFragment extends BaseFragment implements AMapLocationListener, 
                                 addPhoneList.clear();
                                 addNameList.clear();
                                 if (MySharedPrefrencesUtil.getParam(mActivity, "my_phone_type", "").equals("1")) {
-                                    for (int i = 0; i < homeListData.getData().getContactList().size(); i++) {
+                                    for (int i = 0; i < 5; i++) {
                                         addPhoneList.add(homeListData.getData().getContactList().get(i).getPhone());
                                         addIDList.add(homeListData.getData().getContactList().get(i).getId());
                                         addNameList.add(homeListData.getData().getContactList().get(i).getNickname());
@@ -663,10 +663,10 @@ public class HomeFragment extends BaseFragment implements AMapLocationListener, 
                                 @Override
                                 public void onNo() {
                                 }
-                            }).show();
+                            },"").show();
                         }
                     } else {//如果不是
-                        DialogOkUtil.show_OK_NO_Dialog(getActivity(), "被动加粉专属于VIP会员，是否开通VIP特权？", new DialogOkUtil.On_OK_N0_ClickListener() {
+                        DialogOkUtil.show_OK_NO_Dialog(getActivity(), "邀请好友注册,您和好友各获得三天被动加粉,请到个人中心发起邀请,点击确定.开通VIP解锁被动加粉.", new DialogOkUtil.On_OK_N0_ClickListener() {
                             @Override
                             public void onOk() {
                                 Intent in = new Intent(mContext, OpenVipActivity.class);
@@ -677,7 +677,7 @@ public class HomeFragment extends BaseFragment implements AMapLocationListener, 
                             public void onNo() {
 
                             }
-                        }).show();
+                        },"邀请好友,送三天被加,送置顶").show();
                     }
                 }
                 else {
@@ -720,23 +720,30 @@ public class HomeFragment extends BaseFragment implements AMapLocationListener, 
                 break;
             case R.id.zhiding_txl_tv://置顶通讯录
                 if (app.getPurseData() != null) {
-                    if (Integer.parseInt(app.getPurseData().getTopbalance()) > 0) {
+                    if (Integer.parseInt(app.getPurseData().getTopbalance()) >= 0) {
                         MyUtils.Loge("AAA", TimeUtil.formatDuring(System.currentTimeMillis()));
                         if (MyUtils.Str2Int(app.getPurseData().getTopbalance()) == 0) {
-                            DialogOkUtil.show_Ok_Dialog(mActivity, "很遗憾，您的置顶次数不足", new DialogOkUtil.On_OK_ClickListener() {
+                            DialogOkUtil.show_Ok_Dialog(mActivity, "好友通过您的邀请码注册蓝狐,您和好友各获得半小时置顶,在个人中心发起邀请,点击确定,直接兑换置顶.", new DialogOkUtil.On_OK_ClickListener() {
                                 @Override
                                 public void onOk() {
                                     Intent in = new Intent(mActivity, DHZDActivity.class);
                                     mActivity.startActivity(in);
                                 }
-                            }).show();
+                            },"邀请好友,送三天被加,送置顶").show();
                         } else {
                             showZDDialog();
                         }
 
                     } else {
-                        Intent in9 = new Intent(mContext, DHZDActivity.class);
-                        startActivity(in9);
+                        DialogOkUtil.show_Ok_Dialog(mActivity, "好友通过您的邀请码注册蓝狐,您和好友各获得半小时置顶,在个人中心发起邀请,点击确定,直接兑换置顶.", new DialogOkUtil.On_OK_ClickListener() {
+                            @Override
+                            public void onOk() {
+                                Intent in = new Intent(mActivity, DHZDActivity.class);
+                                mActivity.startActivity(in);
+                            }
+                        },"邀请好友,送三天被加,送置顶").show();
+//                        Intent in9 = new Intent(mContext, DHZDActivity.class);
+//                        startActivity(in9);
                     }
                 }
                 break;

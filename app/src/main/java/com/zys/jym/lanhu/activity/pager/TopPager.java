@@ -202,13 +202,13 @@ boolean scrollFlag= false;// 标记是否滑动
         doItemId=id;
         if (app.getPurseData()!=null){
             if (MyUtils.Str2Int(app.getPurseData().getTopbalance())==0){
-                DialogOkUtil.show_Ok_Dialog(mMainActivity, "很遗憾，您的置顶次数不足", new DialogOkUtil.On_OK_ClickListener() {
+                DialogOkUtil.show_Ok_Dialog(mMainActivity, "好友通过您的邀请码注册蓝狐,您和好友各获得半小时置顶,在个人中心发起邀请,点击确定,直接兑换置顶.", new DialogOkUtil.On_OK_ClickListener() {
                     @Override
                     public void onOk() {
                         Intent in =new Intent(mMainActivity, DHZDActivity.class);
                         mMainActivity.startActivity(in);
                     }
-                }).show();
+                },"邀请好友,送三天被加,送置顶").show();
             }else {
                 showZDDialog();
             }
@@ -229,7 +229,7 @@ boolean scrollFlag= false;// 标记是否滑动
                     Intent in =new Intent(mMainActivity, OpenVipActivity.class);
                     mMainActivity.startActivity(in);
                 }
-            }).show();
+            },"").show();
 
         }else {
             doZDSX();
@@ -313,7 +313,7 @@ boolean scrollFlag= false;// 标记是否滑动
             public void onNo() {
 
             }
-        }).show();
+        },"").show();
 
 
     }
@@ -402,13 +402,13 @@ boolean scrollFlag= false;// 标记是否滑动
     }
     private static void doZd() {
         if (MyUtils.Str2Int(app.getPurseData().getTopbalance())<zdNum){
-            DialogOkUtil.show_Ok_Dialog(mMainActivity, "很遗憾，您的置顶次数不足", new DialogOkUtil.On_OK_ClickListener() {
+            DialogOkUtil.show_Ok_Dialog(mMainActivity, "好友通过您的邀请码注册蓝狐,您和好友各获得半小时置顶,在个人中心发起邀请,点击确定,直接兑换置顶.", new DialogOkUtil.On_OK_ClickListener() {
                 @Override
                 public void onOk() {
                     Intent in =new Intent(mMainActivity, DHZDActivity.class);
                     mMainActivity.startActivity(in);
                 }
-            }).show();
+            },"邀请好友,送三天被加,送置顶").show();
             return;
         }
         MyUtils.showDialog(mMainActivity,"置顶中...");
