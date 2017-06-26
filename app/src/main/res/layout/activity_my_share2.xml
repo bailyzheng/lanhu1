@@ -55,6 +55,7 @@
                         android:textSize="14sp"
                         android:text="我的邀请码:"/>
                     <TextView
+                        android:id="@+id/tv_share2_regcode"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="--"
@@ -111,6 +112,7 @@
                             android:textSize="10sp"/>
                     </LinearLayout>
                     <TextView
+                        android:id="@+id/tv_share2_wx"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="去分享"
@@ -166,6 +168,7 @@
                             android:textSize="10sp"/>
                     </LinearLayout>
                     <TextView
+                        android:id="@+id/tv_share2_wxq"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="去分享"
@@ -224,6 +227,7 @@
                             android:textSize="10sp"/>
                     </LinearLayout>
                     <TextView
+                        android:id="@+id/tv_share2_qq"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="去分享"
@@ -279,6 +283,7 @@
                             android:textSize="10sp"/>
                     </LinearLayout>
                     <TextView
+                        android:id="@+id/tv_share2_qqk"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="去分享"

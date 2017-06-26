@@ -147,4 +147,12 @@ public class LHHttpUrl {
      * 保存通讯录
      */
     public static final String KEEP_PHONE_URL=URL+"Contact/expAnzhuoContact";//Contact/expAnzhuoContact  //Contact/expContact
+    /**
+     * 获取分享配置
+     */
+    public static final String GET_SHARE_URL=URL+"Public/getShareConfig";
+    /**
+     * 获取分享状态
+     */
+    public static final String GET_SHARE_STATUS_URL=URL+"Index/share";
 }

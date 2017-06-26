@@ -2,6 +2,7 @@ package com.zys.jym.lanhu;
 
 import android.app.Application;
 
+import com.mob.MobApplication;
 import com.tencent.bugly.crashreport.CrashReport;
 import com.tencent.smtt.sdk.QbSdk;
 import com.tencent.smtt.sdk.TbsListener;
@@ -25,7 +26,7 @@ import okhttp3.OkHttpClient;
  * Created by Administrator on 2016/12/14.
  */
 
-public class App extends Application {
+public class App extends MobApplication {
     String TAG="TAG--App";
     private boolean isLogin = false;
     private User user = null;

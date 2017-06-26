@@ -144,7 +144,7 @@ public class HomeListData implements Serializable {
             private String city;
             private String viprest;
             private String toprest;
-            private int type=1;
+            private int type = 1;
 
             public int getType() {
                 return type;
