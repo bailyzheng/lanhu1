@@ -188,7 +188,7 @@ public class HomeFragment extends BaseFragment implements AMapLocationListener, 
                         @Override
                         public void onNo() {
                         }
-                    },"邀请好友,送三天被加,送置顶").show();
+                    }, "邀请好友,送三天被加,送置顶").show();
                     for (int i = 0; i < addPhoneList.size(); i++) {
                         sb.append(addPhoneList.get(i) + "^");
                         MyUtils.Loge(TAG, "添加的手机号：" + addPhoneList.get(i));
@@ -375,7 +375,7 @@ public class HomeFragment extends BaseFragment implements AMapLocationListener, 
         MyUtils.Loge(TAG, "HomeFragment--initData");
 
 //        if (app != null && app.getUser() != null && !TextUtils.isEmpty(app.getUser().getLogin_token())) {
-        if(!TextUtils.isEmpty(SPrefUtil.getString(mActivity,"TOKEN",""))){
+        if (!TextUtils.isEmpty(SPrefUtil.getString(mActivity, "TOKEN", ""))) {
             Message msg = Message.obtain();
             msg.what = 0x11;
             handler3.sendMessage(msg);
@@ -433,36 +433,36 @@ public class HomeFragment extends BaseFragment implements AMapLocationListener, 
         }
         MyUtils.Loge(TAG, "stringBuilder：" + stringBuilder.toString());
 //        if (app != null && app.getUser() != null && !TextUtils.isEmpty(app.getUser().getLogin_token())) {
-            OkHttpUtils
-                    .post()
-                    .url(LHHttpUrl.KEEP_PHONE_URL)
+        OkHttpUtils
+                .post()
+                .url(LHHttpUrl.KEEP_PHONE_URL)
 //                .url("http://139.224.194.108/lh/Api/Contact/getPost")
-                    .addParams("arrexp", stringBuilder.toString())
+                .addParams("arrexp", stringBuilder.toString())
 //                    .addParams("login_token", app.getUser().getLogin_token())   //SPrefUtil.getString(mActivity,"TOKEN","")
-                    .addParams("login_token", SPrefUtil.getString(mActivity,"TOKEN",""))
-                    .build()
-                    .execute(new KeepPhoneCallback() {
-                        @Override
-                        public void onError(Call call, Exception e) {
-                        }
+                .addParams("login_token", SPrefUtil.getString(mActivity, "TOKEN", ""))
+                .build()
+                .execute(new KeepPhoneCallback() {
+                    @Override
+                    public void onError(Call call, Exception e) {
+                    }
 
-                        @Override
-                        public void onResponse(KeepPhoneData keepPhoneData) {
-                            MyUtils.Loge(TAG, keepPhoneData.getErrmsg());
-                            if (keepPhoneData.getErrcode() == 40001) {
-                                ActivityUtil.exitAll();
-                                ActivityUtil.toLogin(mActivity);
-                                return;
-                            }
-                            if (keepPhoneData.getErrcode() == 1) {
-                                MyUtils.Loge(TAG, keepPhoneData.getErrmsg());
-                                page = 1;
-                                contactList.clear();
-                                addPhoneList.clear();
-                                getData2(page, p, c);
-                            }
+                    @Override
+                    public void onResponse(KeepPhoneData keepPhoneData) {
+                        MyUtils.Loge(TAG, keepPhoneData.getErrmsg());
+                        if (keepPhoneData.getErrcode() == 40001) {
+                            ActivityUtil.exitAll();
+                            ActivityUtil.toLogin(mActivity);
+                            return;
                         }
-                    });
+                        if (keepPhoneData.getErrcode() == 1) {
+                            MyUtils.Loge(TAG, keepPhoneData.getErrmsg());
+                            page = 1;
+                            contactList.clear();
+                            addPhoneList.clear();
+                            getData2(page, p, c);
+                        }
+                    }
+                });
 //        }
     }
 
@@ -542,15 +542,6 @@ public class HomeFragment extends BaseFragment implements AMapLocationListener, 
                                         @Override
                                         public void onItemClick(View view, int position) {
                                             MyUtils.Loge(TAG, "点击了：" + position + "条");
-                                            if (contactList.get(position).getType() == 1) {
-                                                contactList.get(position).setType(2);
-                                                mAdapter.setData(contactList);
-                                                addPhoneList.add(contactList.get(position).getPhone());
-                                                addNameList.add(contactList.get(position).getNickname());
-                                                tv_home_addfen.setText("立即加粉(" + addPhoneList.size() + ")");
-//                                                tv_home_delete.setText("清除数据(" + addPhoneList.size() + ")");
-                                                return;
-                                            }
                                             if (contactList.get(position).getType() == 2) {
                                                 contactList.get(position).setType(1);
                                                 mAdapter.setData(contactList);
@@ -560,6 +551,19 @@ public class HomeFragment extends BaseFragment implements AMapLocationListener, 
 //                                                tv_home_delete.setText("清除数据(" + addPhoneList.size() + ")");
                                                 return;
                                             }
+                                            if (addPhoneList.size() < 5 && contactList.get(position).getType() == 1) {
+                                                contactList.get(position).setType(2);
+                                                mAdapter.setData(contactList);
+                                                addPhoneList.add(contactList.get(position).getPhone());
+                                                addNameList.add(contactList.get(position).getNickname());
+                                                tv_home_addfen.setText("立即加粉(" + addPhoneList.size() + ")");
+//                                                tv_home_delete.setText("清除数据(" + addPhoneList.size() + ")");
+                                                return;
+                                            }else {
+                                                MyUtils.showToast(mActivity,"为了保证加粉数量, 每次最多勾选5个名片, 分多次加, 加粉更多哦~");
+                                            }
+
+
                                         }
                                     });
 
@@ -646,7 +650,7 @@ public class HomeFragment extends BaseFragment implements AMapLocationListener, 
         switch (view.getId()) {
             case R.id.iv_home_jf:
 //                if (app != null && app.getUser() != null && !TextUtils.isEmpty(app.getUser().getLogin_token()))
-                if(!TextUtils.isEmpty(SPrefUtil.getString(mActivity,"TOKEN",""))) {
+                if (!TextUtils.isEmpty(SPrefUtil.getString(mActivity, "TOKEN", ""))) {
                     //判断是不是VIP
                     if (app.getPurseData() != null && Long.parseLong(app.getPurseData().getViprest()) > 0) {//如果是
                         if (MySharedPrefrencesUtil.getParam(mContext, "isAllowAdd", "").equals("open")) {
@@ -663,7 +667,7 @@ public class HomeFragment extends BaseFragment implements AMapLocationListener, 
                                 @Override
                                 public void onNo() {
                                 }
-                            },"").show();
+                            }, "").show();
                         }
                     } else {//如果不是
                         DialogOkUtil.show_OK_NO_Dialog(getActivity(), "邀请好友注册,您和好友各获得三天被动加粉,请到个人中心发起邀请,点击确定.开通VIP解锁被动加粉.", new DialogOkUtil.On_OK_N0_ClickListener() {
@@ -677,10 +681,9 @@ public class HomeFragment extends BaseFragment implements AMapLocationListener, 
                             public void onNo() {
 
                             }
-                        },"邀请好友,送三天被加,送置顶").show();
+                        }, "邀请好友,送三天被加,送置顶").show();
                     }
-                }
-                else {
+                } else {
                     MyUtils.showToast(mContext, "请先登录");
                 }
                 break;
@@ -729,7 +732,7 @@ public class HomeFragment extends BaseFragment implements AMapLocationListener, 
                                     Intent in = new Intent(mActivity, DHZDActivity.class);
                                     mActivity.startActivity(in);
                                 }
-                            },"邀请好友,送三天被加,送置顶").show();
+                            }, "邀请好友,送三天被加,送置顶").show();
                         } else {
                             showZDDialog();
                         }
@@ -741,7 +744,7 @@ public class HomeFragment extends BaseFragment implements AMapLocationListener, 
                                 Intent in = new Intent(mActivity, DHZDActivity.class);
                                 mActivity.startActivity(in);
                             }
-                        },"邀请好友,送三天被加,送置顶").show();
+                        }, "邀请好友,送三天被加,送置顶").show();
 //                        Intent in9 = new Intent(mContext, DHZDActivity.class);
 //                        startActivity(in9);
                     }
@@ -878,39 +881,39 @@ public class HomeFragment extends BaseFragment implements AMapLocationListener, 
      */
     private static void zdtxl() {
 //        if (app != null && app.getUser() != null && !TextUtils.isEmpty(app.getUser().getLogin_token())) {
-            OkHttpUtils
-                    .post()
-                    .url(LHHttpUrl.HOME_UP_PHONE_URL)
-                    .addParams("num", num + "")
+        OkHttpUtils
+                .post()
+                .url(LHHttpUrl.HOME_UP_PHONE_URL)
+                .addParams("num", num + "")
 //                    .addParams("login_token", app.getUser().getLogin_token())
-                    .addParams("login_token", SPrefUtil.getString(mActivity,"TOKEN",""))
-                    .build()
-                    .execute(new HomeZDCallback() {
+                .addParams("login_token", SPrefUtil.getString(mActivity, "TOKEN", ""))
+                .build()
+                .execute(new HomeZDCallback() {
 
-                        @Override
-                        public void onError(Call call, Exception e) {
-                            MyUtils.showToast(mContext, "连接服务器失败，请稍后再试");
+                    @Override
+                    public void onError(Call call, Exception e) {
+                        MyUtils.showToast(mContext, "连接服务器失败，请稍后再试");
+                    }
+
+                    @Override
+                    public void onResponse(HomeZDData homeZDData) {
+                        if (homeZDData.getErrcode() == 40001) {
+                            ActivityUtil.exitAll();
+                            ActivityUtil.toLogin(mActivity);
+                            return;
                         }
-
-                        @Override
-                        public void onResponse(HomeZDData homeZDData) {
-                            if (homeZDData.getErrcode() == 40001) {
-                                ActivityUtil.exitAll();
-                                ActivityUtil.toLogin(mActivity);
-                                return;
-                            }
-                            if (homeZDData.getErrcode() == 1) {
-                                Long time = num * 30 * 60 * 1000l;
-                                MySharedPrefrencesUtil.setParam(mContext, "zd_time", System.currentTimeMillis() + time);
-                                MyUtils.Loge("AAA", TimeUtil.formatDuring(System.currentTimeMillis()));
-                                zhiding_txl_tv.setText(TimeUtil.formatDuring(System.currentTimeMillis() + time) + " 结束置顶");
-                                zhiding_txl_tv.setClickable(false);
-                            } else {
-                                MyUtils.showToast(mActivity, homeZDData.getErrmsg());
+                        if (homeZDData.getErrcode() == 1) {
+                            Long time = num * 30 * 60 * 1000l;
+                            MySharedPrefrencesUtil.setParam(mContext, "zd_time", System.currentTimeMillis() + time);
+                            MyUtils.Loge("AAA", TimeUtil.formatDuring(System.currentTimeMillis()));
+                            zhiding_txl_tv.setText(TimeUtil.formatDuring(System.currentTimeMillis() + time) + " 结束置顶");
+                            zhiding_txl_tv.setClickable(false);
+                        } else {
+                            MyUtils.showToast(mActivity, homeZDData.getErrmsg());
 //                            MyUtils.showToast(mActivity,"置顶失败");
-                            }
                         }
-                    });
+                    }
+                });
 //        }
 
     }
@@ -1084,14 +1087,14 @@ public class HomeFragment extends BaseFragment implements AMapLocationListener, 
      */
     private static void updateLocation(String province, String city) {
 //        if (app != null && app.getUser() != null && !TextUtils.isEmpty(app.getUser().getLogin_token())) {
-        if(!TextUtils.isEmpty(SPrefUtil.getString(mActivity,"TOKEN",""))){
+        if (!TextUtils.isEmpty(SPrefUtil.getString(mActivity, "TOKEN", ""))) {
             MyUtils.Loge(TAG, "updateLocation--省：" + province);
             MyUtils.Loge(TAG, "updateLocation--市：" + city);
             OkHttpUtils
                     .post()
                     .url(LHHttpUrl.UPDATA_LOCATION_URL)
 //                    .addParams("login_token", app.getUser().getLogin_token())
-                    .addParams("login_token", SPrefUtil.getString(mActivity,"TOKEN",""))
+                    .addParams("login_token", SPrefUtil.getString(mActivity, "TOKEN", ""))
                     .addParams("province", province)
                     .addParams("city", city)
                     .build()
@@ -1116,7 +1119,7 @@ public class HomeFragment extends BaseFragment implements AMapLocationListener, 
     public void onRefresh() {
         page = 1;
 //        if (app != null && app.getUser() != null && !TextUtils.isEmpty(app.getUser().getLogin_token())) {
-        if (!TextUtils.isEmpty(SPrefUtil.getString(mActivity,"TOKEN",""))) {
+        if (!TextUtils.isEmpty(SPrefUtil.getString(mActivity, "TOKEN", ""))) {
             getData2(page, p, c);
             rcv_home_personal.addOnScrollListener(new RecyclerViewListener());
         } else {
@@ -1156,7 +1159,7 @@ public class HomeFragment extends BaseFragment implements AMapLocationListener, 
                     //加载更多功能的代码
                     page++;
 //                    if (app != null && app.getUser() != null && !TextUtils.isEmpty(app.getUser().getLogin_token())) {
-                    if(!TextUtils.isEmpty(SPrefUtil.getString(mActivity,"TOKEN",""))){
+                    if (!TextUtils.isEmpty(SPrefUtil.getString(mActivity, "TOKEN", ""))) {
                         getData2(page, p, c);
                         rcv_home_personal.addOnScrollListener(new RecyclerViewListener());
                     } else {

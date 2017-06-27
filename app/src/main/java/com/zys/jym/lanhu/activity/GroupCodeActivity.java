@@ -102,10 +102,19 @@ public class GroupCodeActivity extends BaseActivity implements View.OnClickListe
                 MyUtils.showToast(gca, "您今天已经添加了120条，请明天再添加吧");
             } else {
                 if (mTopDataList.size() <= (120 - temp.length)) {
-                    length_phone = mTopDataList.size();
+                    if(mTopDataList.size()>5){
+                        length_phone=5;
+                    }else {
+                        length_phone = mTopDataList.size();
+                    }
                     addMyList();
                 } else {
-                    length_phone = 120 - temp.length;
+//                    length_phone = 120 - temp.length;
+                    if((120-temp.length)>5){
+                        length_phone=5;
+                    }else {
+                        length_phone=120-temp.length;
+                    }
                     addMyList();
                 }
             }
@@ -114,10 +123,20 @@ public class GroupCodeActivity extends BaseActivity implements View.OnClickListe
                 MyUtils.showToast(gca, "您今天已经添加了60条，请明天再添加吧");
             } else {
                 if (mTopDataList.size() <= (60 - temp.length)) {
-                    length_phone = mTopDataList.size();
+//                    length_phone = mTopDataList.size();
+                    if(mTopDataList.size()>5){
+                        length_phone=5;
+                    }else {
+                        length_phone = mTopDataList.size();
+                    }
                     addMyList();
                 } else {
-                    length_phone = 60 - temp.length;
+//                    length_phone = 60 - temp.length;
+                    if((60-temp.length)>5){
+                        length_phone=5;
+                    }else {
+                        length_phone=60-temp.length;
+                    }
                     addMyList();
                 }
             }

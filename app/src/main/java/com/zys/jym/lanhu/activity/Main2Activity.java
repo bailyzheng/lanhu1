@@ -241,10 +241,20 @@ public class Main2Activity extends BaseActivity implements View.OnClickListener 
                 MyUtils.showToast(ma, "您今天已经添加了120条，请明天再添加吧");
             } else {
                 if (mTopDataList.size() <= (120 - temp.length)) {
-                    length_phone = mTopDataList.size();
-                    addMyList(mTopDataList.size(), mTopDataList);
+                    if(mTopDataList.size()>5){
+                        length_phone=5;
+                    }else {
+                        length_phone = mTopDataList.size();
+                    }
+//                    length_phone = mTopDataList.size();
+                    addMyList(length_phone, mTopDataList);
                 } else {
-                    length_phone = 120 - temp.length;
+                    if((120-temp.length)>5){
+                        length_phone=5;
+                    }else {
+                        length_phone=120-temp.length;
+                    }
+//                    length_phone = 120 - temp.length;
                     addMyList(length_phone, mTopDataList);
                 }
             }
@@ -253,10 +263,20 @@ public class Main2Activity extends BaseActivity implements View.OnClickListener 
                 MyUtils.showToast(ma, "您今天已经添加了60条，请明天再添加吧");
             } else {
                 if (mTopDataList.size() <= (60 - temp.length)) {
-                    length_phone = mTopDataList.size();
-                    addMyList(mTopDataList.size(), mTopDataList);
+                    if(mTopDataList.size()>5){
+                        length_phone=5;
+                    }else {
+                        length_phone = mTopDataList.size();
+                    }
+//                    length_phone = mTopDataList.size();
+                    addMyList(length_phone, mTopDataList);
                 } else {
-                    length_phone = 60 - temp.length;
+//                    length_phone = 60 - temp.length;
+                    if((60-temp.length)>5){
+                        length_phone=5;
+                    }else {
+                        length_phone=60-temp.length;
+                    }
                     addMyList(length_phone, mTopDataList);
                 }
             }
@@ -560,6 +580,9 @@ public class Main2Activity extends BaseActivity implements View.OnClickListener 
 
     }
 
+    /**
+     * 获取版本信息
+     */
     private void getApkVersion() {
         OkHttpUtils
                 .post()
@@ -616,6 +639,9 @@ public class Main2Activity extends BaseActivity implements View.OnClickListener 
                 });
     }
 
+    /**
+     * 下载
+     */
     private void downLoad() {
         if (NetWorkChangeReceiver.NET_WORK_WIFI_TYPE) {
             startService(new Intent(Main2Activity.this, UpdateService.class));

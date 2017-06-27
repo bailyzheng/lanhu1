@@ -1,27 +1,15 @@
 package com.zys.jym.lanhu.activity;
 
-<<<<<<< HEAD
-=======
-import android.Manifest;
-import android.content.ComponentName;
->>>>>>> github/master
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Matrix;
-import android.graphics.drawable.BitmapDrawable;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-<<<<<<< HEAD
-=======
-import android.provider.MediaStore;
->>>>>>> github/master
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
@@ -42,17 +30,9 @@ import com.tencent.mm.sdk.modelmsg.WXWebpageObject;
 import com.tencent.mm.sdk.openapi.IWXAPI;
 import com.tencent.mm.sdk.openapi.WXAPIFactory;
 import com.umeng.socialize.ShareAction;
-<<<<<<< HEAD
 import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.UMShareListener;
 import com.umeng.socialize.bean.SHARE_MEDIA;
-=======
-import com.umeng.socialize.ShareContent;
-import com.umeng.socialize.UMShareAPI;
-import com.umeng.socialize.UMShareListener;
-import com.umeng.socialize.bean.SHARE_MEDIA;
-import com.umeng.socialize.common.SocializeConstants;
->>>>>>> github/master
 import com.umeng.socialize.media.UMImage;
 import com.umeng.socialize.media.UMWeb;
 import com.zys.jym.lanhu.BaseActivity;
@@ -68,13 +48,7 @@ import cn.sharesdk.framework.Platform;
 import cn.sharesdk.framework.ShareSDK;
 import cn.sharesdk.onekeyshare.OnekeyShare;
 import cn.sharesdk.tencent.qq.QQ;
-<<<<<<< HEAD
 import cn.sharesdk.wechat.moments.WechatMoments;
-=======
-import cn.sharesdk.tencent.qzone.QZone;
-
-import static com.umeng.socialize.utils.DeviceConfig.context;
->>>>>>> github/master
 
 
 /**
@@ -93,10 +67,7 @@ public class ShareActivity extends BaseActivity implements View.OnClickListener 
     private IWXAPI api;
     private static final int IMAGE_HALFWIDTH = 40;//宽度值，影响中间图片大小
     private String contents;
-<<<<<<< HEAD
     private Platform plat;
-=======
->>>>>>> github/master
 //    private UMShareListener umShareListener = new UMShareListener() {
 //        @Override
 //        public void onStart(SHARE_MEDIA share_media) {
@@ -203,11 +174,7 @@ public class ShareActivity extends BaseActivity implements View.OnClickListener 
         switch (view.getId()) {
             case R.id.tv_ql:
 //                share(2);
-<<<<<<< HEAD
                 plat = ShareSDK.getPlatform(QQ.NAME);
-=======
-                Platform plat = ShareSDK.getPlatform(QQ.NAME);
->>>>>>> github/master
                 shareQQ(plat.getName());
                 break;
             case R.id.tv_pyq:

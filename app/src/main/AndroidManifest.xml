@@ -81,7 +81,7 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
-    <uses-permission android:name="android.permission.WRITE_APN_SETTINGS"/>
+    <!--<uses-permission android:name="android.permission.WRITE_APN_SETTINGS"/>-->
     <!--end-->
     <!-- Mob(掌淘)分享添加必要的权限 -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
@@ -141,7 +141,6 @@
         <!-- 填写您从Mob开发者后台中得到的Appkey和AppSecret -->
         <meta-data android:name="Mob-AppKey" android:value="1ef869f6dcd84"/>
         <meta-data android:name="Mob-AppSecret" android:value="6ed0f86008c430cddc418e77c30c7e4e"/>
-<<<<<<< HEAD
         <!--微信-->
         <activity
             android:name=".wxapi.WXEntryActivity"
@@ -149,8 +148,6 @@
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:exported="true"
             android:screenOrientation="portrait" />
-=======
->>>>>>> github/master
 
 
         <!-- 高德地图服务 -->
