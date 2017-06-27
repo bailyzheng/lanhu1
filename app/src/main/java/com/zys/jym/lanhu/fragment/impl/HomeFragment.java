@@ -169,7 +169,7 @@ public class HomeFragment extends BaseFragment implements AMapLocationListener, 
                     String currentDate = (new SimpleDateFormat("yyyy-MM-dd")).format(new Date());
                     String hcDate = (String) MySharedPrefrencesUtil.getParam(mActivity, "CLEAN_DATE", "");
                     MySharedPrefrencesUtil.setParam(mActivity, "CLEAN_DATE", currentDate);
-                    DialogOkUtil.show_OK_NO_Dialog(mActivity, "加粉成功后,请打开微信,稍等片刻,等待新的好友出现后,返回蓝狐继续加粉.", new DialogOkUtil.On_OK_N0_ClickListener() {
+                    DialogOkUtil.show_OK_NO_Dialog(mActivity, "加粉成功,请打开微信,稍等片刻,等待新的好友出现后,返回蓝狐继续加粉.", new DialogOkUtil.On_OK_N0_ClickListener() {
                         @Override
                         public void onOk() {
                             try {

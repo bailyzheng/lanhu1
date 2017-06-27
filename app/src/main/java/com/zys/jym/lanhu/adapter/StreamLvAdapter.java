@@ -71,19 +71,23 @@ public class StreamLvAdapter extends BaseAdapter {
                 case 1:
                     holder.tv_content.setText("充值狐币");
                     //MyUtils.Str2Int(MyUtils.Intercept_Int_Point(mdata.getMoney()))*0.01
-                    holder.tv_num.setText("+"+MyUtils.Intercept_Int_Point(MyUtils.Str2Double(mdata.getMoney())*0.01+""));
+//                    holder.tv_num.setText("+"+MyUtils.Intercept_Int_Point(MyUtils.Str2Double(mdata.getMoney())*0.01+""));
+                    holder.tv_num.setText("+"+MyUtils.mul(Double.valueOf(mdata.getMoney()),0.01));
                     break;
                 case 2:
                     holder.tv_content.setText("开通会员");
-                    holder.tv_num.setText("-"+ MyUtils.Intercept_Int_Point(MyUtils.Str2Double(mdata.getMoney())*0.01+""));
+//                    holder.tv_num.setText("-"+ MyUtils.Intercept_Int_Point(MyUtils.Str2Double(mdata.getMoney())*0.01+""));
+                    holder.tv_num.setText("+"+MyUtils.mul(Double.valueOf(mdata.getMoney()),0.01));
                     break;
                 case 3:
                     holder.tv_content.setText("购买置顶");
-                    holder.tv_num.setText("-"+ MyUtils.Intercept_Int_Point(MyUtils.Str2Double(mdata.getMoney())*0.01+""));
+//                    holder.tv_num.setText("-"+ MyUtils.Intercept_Int_Point(MyUtils.Str2Double(mdata.getMoney())*0.01+""));
+                    holder.tv_num.setText("+"+MyUtils.mul(Double.valueOf(mdata.getMoney()),0.01));
                     break;
                 case 4:
                     holder.tv_content.setText("兑换狐币");
-                    holder.tv_num.setText("+"+ MyUtils.Intercept_Int_Point(MyUtils.Str2Double(mdata.getMoney())*0.01+""));
+//                    holder.tv_num.setText("+"+ MyUtils.Intercept_Int_Point(MyUtils.Str2Double(mdata.getMoney())*0.01+""));
+                    holder.tv_num.setText("+"+MyUtils.mul(Double.valueOf(mdata.getMoney()),0.01));
                     break;
             }
         }

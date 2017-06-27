@@ -219,7 +219,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
             tv_vip_time.setText("0天");
             tv_nickname.setTextColor(mActivity.getResources().getColor(R.color.black));
         }
-        tv_hbye.setText(MyUtils.Intercept_Int_Point(MyUtils.Str2Double(mData.getUserDate().getPursebalance()) * 0.01 + ""));
+        tv_hbye.setText(String.valueOf(MyUtils.mul(Double.valueOf(app.getPurseData().getPursebalance()),0.01)));
 //            tv_hbye.setText((MyUtils.Intercept_Int_Point(MyUtils.Str2Double(app.getPurseData().getPursebalance())*0.01)+""));
         tv_zdnum.setText(mData.getUserDate().getTopbalance() + "次");
     }
@@ -353,7 +353,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
     public static void setPData(PurseData data) {
 //        MyUtils.Loge(TAG,"d="+MyUtils.Str2Double(data.getPursebalance()));
 //        MyUtils.Loge(TAG,"d="+(MyUtils.Str2Double(data.getPursebalance())*0.01));
-        tv_hbye.setText(MyUtils.Intercept_Int_Point(MyUtils.Str2Double(app.getPurseData().getPursebalance()) * 0.01 + ""));
+        tv_hbye.setText(String.valueOf(MyUtils.mul(Double.valueOf(app.getPurseData().getPursebalance()),0.01)));
         tv_zdnum.setText(data.getTopbalance() + "次");
         if (MyUtils.Str2Int(app.getPurseData().getViprest()) > 0) {
             tv_nickname.setTextColor(mActivity.getResources().getColor(R.color.red));
