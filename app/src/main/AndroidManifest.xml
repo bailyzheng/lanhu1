@@ -141,6 +141,7 @@
         <!-- 填写您从Mob开发者后台中得到的Appkey和AppSecret -->
         <meta-data android:name="Mob-AppKey" android:value="1ef869f6dcd84"/>
         <meta-data android:name="Mob-AppSecret" android:value="6ed0f86008c430cddc418e77c30c7e4e"/>
+<<<<<<< HEAD
         <!--微信-->
         <activity
             android:name=".wxapi.WXEntryActivity"
@@ -148,6 +149,8 @@
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:exported="true"
             android:screenOrientation="portrait" />
+=======
+>>>>>>> github/master
 
 
         <!-- 高德地图服务 -->
