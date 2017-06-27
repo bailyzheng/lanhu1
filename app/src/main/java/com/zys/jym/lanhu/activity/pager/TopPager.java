@@ -20,6 +20,7 @@ import com.zys.jym.lanhu.App;
 import com.zys.jym.lanhu.R;
 import com.zys.jym.lanhu.activity.CardDetailsActivity;
 import com.zys.jym.lanhu.activity.DHZDActivity;
+import com.zys.jym.lanhu.activity.MyShare2Activity;
 import com.zys.jym.lanhu.activity.OpenVipActivity;
 import com.zys.jym.lanhu.activity.ShareActivity;
 import com.zys.jym.lanhu.adapter.TopLvAdapter;
@@ -387,7 +388,7 @@ boolean scrollFlag= false;// 标记是否滑动
                     tv_num.setText(zdNum+"");
                     break;
                 case R.id.tv_fenxiang:
-                    Intent in =new Intent(mMainActivity, ShareActivity.class);
+                    Intent in =new Intent(mMainActivity, MyShare2Activity.class);
                     mMainActivity.startActivity(in);
                     break;
                 case R.id.tv_tor:

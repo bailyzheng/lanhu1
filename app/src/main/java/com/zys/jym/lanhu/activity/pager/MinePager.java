@@ -19,6 +19,7 @@ import com.zys.jym.lanhu.activity.KeFuActivity;
 import com.zys.jym.lanhu.activity.Main2Activity;
 import com.zys.jym.lanhu.activity.ModifyDataActivity;
 import com.zys.jym.lanhu.activity.MsgCenterActivity;
+import com.zys.jym.lanhu.activity.MyShare2Activity;
 import com.zys.jym.lanhu.activity.OpenVipActivity;
 import com.zys.jym.lanhu.activity.RechargeActivity;
 import com.zys.jym.lanhu.activity.RedeemCodeActivity;
@@ -182,7 +183,7 @@ public class MinePager extends MainBasePager implements View.OnClickListener {
                 mMainActivity.startActivity(in5);
                 break;
             case R.id.rl_share:
-                Intent in6=new Intent(mMainActivity, ShareActivity.class);
+                Intent in6=new Intent(mMainActivity, MyShare2Activity.class);
                 mMainActivity.startActivity(in6);
                 break;
             case R.id.rl_msg:

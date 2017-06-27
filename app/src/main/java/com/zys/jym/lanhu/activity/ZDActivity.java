@@ -504,7 +504,7 @@ public class ZDActivity extends BaseActivity implements AdapterView.OnItemClickL
                 finish();
                 break;
             case R.id.iv_mine_share:
-                Intent in =new Intent(zda, ShareActivity.class);
+                Intent in =new Intent(zda, MyShare2Activity.class);
                 zda.startActivity(in);
                 break;
             default:

@@ -22,6 +22,7 @@ import com.zys.jym.lanhu.App;
 import com.zys.jym.lanhu.R;
 import com.zys.jym.lanhu.activity.CardDetailsActivity;
 import com.zys.jym.lanhu.activity.LoginActivity;
+import com.zys.jym.lanhu.activity.MyShare2Activity;
 import com.zys.jym.lanhu.activity.SearchActivity;
 import com.zys.jym.lanhu.activity.SelectP2Activity;
 import com.zys.jym.lanhu.activity.ShareActivity;
@@ -138,7 +139,7 @@ public class GroupPager extends MainBasePager implements AdapterView.OnItemClick
             @Override
             public void onClick(View view) {
                 if (app.getIsLogin()){
-                    Intent in =new Intent(mMainActivity, ShareActivity.class);
+                    Intent in =new Intent(mMainActivity, MyShare2Activity.class);
                     mMainActivity.startActivity(in);
                 }else {
                     Intent in =new Intent(mMainActivity, LoginActivity.class);
