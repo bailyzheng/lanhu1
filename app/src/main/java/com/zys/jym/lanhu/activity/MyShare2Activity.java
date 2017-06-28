@@ -1,6 +1,9 @@
 package com.zys.jym.lanhu.activity;
 
+import android.content.res.Resources;
+import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -31,6 +34,9 @@ import com.zys.jym.lanhu.utils.SPrefUtil;
 
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Queue;
@@ -59,6 +65,8 @@ public class MyShare2Activity extends BaseActivity implements View.OnClickListen
     private Toolbar index_toolbar;
     private RequestQueue volleyQueue;
     private String type;
+    private String path;
+    private Bitmap bmp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +79,28 @@ public class MyShare2Activity extends BaseActivity implements View.OnClickListen
     }
 
     private void initData() {
+//        InputStream abpath = getClass().getResourceAsStream("/assets/icon_launcher.png");
+//        try {
+//            path = new String(InputStreamToByte(abpath ));
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        Resources r = getResources();
+//        InputStream is = r.openRawResource(R.mipmap.icon_launcher);
+//        BitmapDrawable bmpDraw = new BitmapDrawable(is);
+//        bmp = bmpDraw.getBitmap();
         getShareData();
+    }
+
+    private byte[] InputStreamToByte(InputStream is) throws IOException {
+        ByteArrayOutputStream bytestream = new ByteArrayOutputStream();
+        int ch;
+        while ((ch = is.read()) != -1) {
+            bytestream.write(ch);
+        }
+        byte imgdata[] = bytestream.toByteArray();
+        bytestream.close();
+        return imgdata;
     }
 
     @Override
@@ -84,7 +113,7 @@ public class MyShare2Activity extends BaseActivity implements View.OnClickListen
      */
     private void getShareStatus() {
         String url = LHHttpUrl.GET_SHARE_STATUS_URL;
-        StringRequest stringRequest = new StringRequest(StringRequest.Method.POST,url, new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(StringRequest.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 MyUtils.Loge(TAG, "response:" + response);
@@ -92,7 +121,7 @@ public class MyShare2Activity extends BaseActivity implements View.OnClickListen
                     JSONObject jsonObject = new JSONObject(response);
                     int errcode = jsonObject.getInt("errcode");
                     String errmsg = jsonObject.getString("errmsg");
-                    MyUtils.showToast(MyShare2Activity.this,errmsg);
+                    MyUtils.showToast(MyShare2Activity.this, errmsg);
                 } catch (Exception e) {
 
                 }
@@ -102,12 +131,12 @@ public class MyShare2Activity extends BaseActivity implements View.OnClickListen
             public void onErrorResponse(VolleyError error) {
                 MyUtils.showToast(MyShare2Activity.this, "网络有问题");
             }
-        }){
+        }) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String ,String> map=new HashMap<>();
-                map.put("login_token",SPrefUtil.getString(MyShare2Activity.this,"TOKEN",""));
-                map.put("type",type);
+                Map<String, String> map = new HashMap<>();
+                map.put("login_token", SPrefUtil.getString(MyShare2Activity.this, "TOKEN", ""));
+                map.put("type", type);
                 return map;
             }
         };
@@ -169,8 +198,9 @@ public class MyShare2Activity extends BaseActivity implements View.OnClickListen
         tv_share2_wx.setOnClickListener(this);
         tv_share2_wxq = (TextView) findViewById(R.id.tv_share2_wxq);
         tv_share2_wxq.setOnClickListener(this);
-        tv_share2_regcode=(TextView)findViewById(R.id.tv_share2_regcode);
+        tv_share2_regcode = (TextView) findViewById(R.id.tv_share2_regcode);
     }
+
     private void initToolBar() {
         index_toolbar = (Toolbar) findViewById(R.id.index_toolbar);
         index_toolbar.setTitle("");
@@ -189,22 +219,22 @@ public class MyShare2Activity extends BaseActivity implements View.OnClickListen
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv_share2_qqk:
-                type="4";
+                type = "4";
                 plat = ShareSDK.getPlatform(QZone.NAME);
                 myShare(plat.getName());
                 break;
             case R.id.tv_share2_qq:
-                type="3";
+                type = "3";
                 plat = ShareSDK.getPlatform(QQ.NAME);
                 myShare(plat.getName());
                 break;
             case R.id.tv_share2_wx:
-                type="1";
+                type = "1";
                 plat = ShareSDK.getPlatform(Wechat.NAME);
                 myShare(plat.getName());
                 break;
             case R.id.tv_share2_wxq:
-                type="2";
+                type = "2";
                 plat = ShareSDK.getPlatform(WechatMoments.NAME);
                 myShare(plat.getName());
                 break;
@@ -215,22 +245,23 @@ public class MyShare2Activity extends BaseActivity implements View.OnClickListen
      * 分享
      */
     private void myShare(String platform) {
-        MyUtils.Loge(TAG,"Regcode:"+getApplicationContext().getUser().getRegcode());
-        MyUtils.Loge(TAG,"url:"+getApplicationContext().getUser().getAppurl());
-        if(!TextUtils.isEmpty(title)&&!TextUtils.isEmpty(content)&&getApplicationContext().getUser()!=null&&!TextUtils.isEmpty(getApplicationContext().getUser().getAppurl())&&!TextUtils.isEmpty(getApplicationContext().getUser().getRegcode())) {
+        MyUtils.Loge(TAG, "Regcode:" + getApplicationContext().getUser().getRegcode());
+        MyUtils.Loge(TAG, "url:" + getApplicationContext().getUser().getAppurl());
+        if (!TextUtils.isEmpty(title) && !TextUtils.isEmpty(content) && getApplicationContext().getUser() != null && !TextUtils.isEmpty(getApplicationContext().getUser().getAppurl()) && !TextUtils.isEmpty(getApplicationContext().getUser().getRegcode())) {
             OnekeyShare oks = new OnekeyShare();
             if (platform != null)
                 oks.setPlatform(platform);
             //关闭sso授权
             oks.disableSSOWhenAuthorize();
 
-            // 分享时Notification的图标和文字  2.5.9以后的版本不     调用此方法
-            //oks.setNotification(R.drawable.ic_launcher, getString(R.string.app_name));
+////             分享时Notification的图标和文字  2.5.9以后的版本不     调用此方法
+//            oks.setNotification(R.drawable.ic_launcher, getString(R.string.app_name));
 
+//            oks.setCustomerLogo(bmp,"蓝狐微商",null);
             // title标题，印象笔记、邮箱、信息、微信、人人网和QQ空间使用
             oks.setCallback(new MyCallBalk());
 
-            oks.setTitle(title+getApplicationContext().getUser().getRegcode());
+            oks.setTitle(title + getApplicationContext().getUser().getRegcode());
 
             // titleUrl是标题的网络链接，仅在人人网和QQ空间使用
             oks.setTitleUrl(getApplicationContext().getUser().getAppurl());
@@ -239,10 +270,12 @@ public class MyShare2Activity extends BaseActivity implements View.OnClickListen
             oks.setText(content);
 
             // imagePath是图片的本地路径，Linked-In以外的平台都支持此参数
-            oks.setImagePath("file:///android_asset/icon_launcher.png");//确保SDcard下面存在此张图片
+//            oks.setImagePath(path);//确保SDcard下面存在此张图片
             // url仅在微信（包括好友和朋友圈）中使用
             oks.setUrl(getApplicationContext().getUser().getAppurl());
-            oks.setImageUrl("file:///android_asset/icon_launcher.png");
+//            oks.setImageUrl("file:///android_asset/icon_launcher.png");
+            if (type.equals("1") ||type.equals("2"))
+                oks.setImageUrl(getApplicationContext().getUser().getAppurl());
             // comment是我对这条分享的评论，仅在人人网和QQ空间使用
 //            oks.setComment("我是测试评论文本");
             // site是分享此内容的网站名称，仅在QQ空间使用
@@ -256,7 +289,8 @@ public class MyShare2Activity extends BaseActivity implements View.OnClickListen
         }
 
     }
-    class MyCallBalk implements PlatformActionListener{
+
+    class MyCallBalk implements PlatformActionListener {
 
         @Override
         public void onComplete(Platform platform, int i, HashMap<String, Object> hashMap) {

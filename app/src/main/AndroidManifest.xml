@@ -105,6 +105,7 @@
         android:icon="@mipmap/icon_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
+
         android:theme="@style/AppTheme">
 
 
@@ -288,7 +289,8 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.Main2Activity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:launchMode="singleInstance"/>
 
         <service
             android:name=".service.UpdateService"
