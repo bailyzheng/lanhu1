@@ -275,7 +275,7 @@ public class MyShare2Activity extends BaseActivity implements View.OnClickListen
             oks.setUrl(getApplicationContext().getUser().getAppurl());
 //            oks.setImageUrl("file:///android_asset/icon_launcher.png");
             if (type.equals("1") ||type.equals("2"))
-                oks.setImageUrl(getApplicationContext().getUser().getAppurl());
+                oks.setImageUrl("http://os93x76c3.bkt.clouddn.com/header@3x.png");
             // comment是我对这条分享的评论，仅在人人网和QQ空间使用
 //            oks.setComment("我是测试评论文本");
             // site是分享此内容的网站名称，仅在QQ空间使用
