@@ -85,7 +85,7 @@ public class StreamLvAdapter extends BaseAdapter {
                     holder.tv_num.setText("+"+MyUtils.mul(Double.valueOf(mdata.getMoney()),0.01));
                     break;
                 case 4:
-                    holder.tv_content.setText("兑换狐币");
+                    holder.tv_content.setText("分享奖励");
 //                    holder.tv_num.setText("+"+ MyUtils.Intercept_Int_Point(MyUtils.Str2Double(mdata.getMoney())*0.01+""));
                     holder.tv_num.setText("+"+MyUtils.mul(Double.valueOf(mdata.getMoney()),0.01));
                     break;
