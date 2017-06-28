@@ -79,13 +79,13 @@ public class KeFu2Activity extends BaseActivity implements View.OnClickListener 
                 if (!TextUtils.isEmpty(qqOne))
                     startToQQ(qqOne);
                 else
-                    MyUtils.showToast(KeFu2Activity.this, "系统繁忙，请稍后再试");
+                    startToQQ("2235725202");
                 break;
             case R.id.tv_kefu_hyf:
                 if (!TextUtils.isEmpty(qqTwo))
                     startToQQ(qqTwo);
                 else
-                    MyUtils.showToast(KeFu2Activity.this, "系统繁忙，请稍后再试");
+                    startToQQ("1197070411");
                 break;
         }
     }
