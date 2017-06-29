@@ -38,7 +38,7 @@ public class MyUtils {
     private static Pattern mPattern;
     private static Matcher mMatcher;
     public static ShapeLoadingDialog aDialog;
-    public static boolean logStatus =true;
+    public static boolean logStatus =false;
 
     public static void Loge(String TAG, String msg) {
         try{

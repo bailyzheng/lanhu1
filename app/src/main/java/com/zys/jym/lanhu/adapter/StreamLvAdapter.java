@@ -66,26 +66,29 @@ public class StreamLvAdapter extends BaseAdapter {
         String time= TimeUtil.timeStamp2Date(mdata.getAddtime(),null);
         holder.tv_hhmm.setText(MyUtils.Intercept_HMS(time));
         holder.tv_yyyymmdd.setText(MyUtils.Intercept_YMD(time));
+
         if (type==1){//狐币流水
+            holder.tv_content.setText(mdata.getRemark());
+            holder.tv_num.setText("+"+MyUtils.mul(Double.valueOf(mdata.getMoney()),0.01));
             switch (MyUtils.Str2Int(mdata.getType())){
                 case 1:
-                    holder.tv_content.setText("充值狐币");
+//                    holder.tv_content.setText("充值狐币");
                     //MyUtils.Str2Int(MyUtils.Intercept_Int_Point(mdata.getMoney()))*0.01
 //                    holder.tv_num.setText("+"+MyUtils.Intercept_Int_Point(MyUtils.Str2Double(mdata.getMoney())*0.01+""));
                     holder.tv_num.setText("+"+MyUtils.mul(Double.valueOf(mdata.getMoney()),0.01));
                     break;
                 case 2:
-                    holder.tv_content.setText("开通会员");
+//                    holder.tv_content.setText("开通会员");
 //                    holder.tv_num.setText("-"+ MyUtils.Intercept_Int_Point(MyUtils.Str2Double(mdata.getMoney())*0.01+""));
-                    holder.tv_num.setText("+"+MyUtils.mul(Double.valueOf(mdata.getMoney()),0.01));
+                    holder.tv_num.setText("-"+MyUtils.mul(Double.valueOf(mdata.getMoney()),0.01));
                     break;
                 case 3:
-                    holder.tv_content.setText("购买置顶");
+//                    holder.tv_content.setText("购买置顶");
 //                    holder.tv_num.setText("-"+ MyUtils.Intercept_Int_Point(MyUtils.Str2Double(mdata.getMoney())*0.01+""));
-                    holder.tv_num.setText("+"+MyUtils.mul(Double.valueOf(mdata.getMoney()),0.01));
+                    holder.tv_num.setText("-"+MyUtils.mul(Double.valueOf(mdata.getMoney()),0.01));
                     break;
                 case 4:
-                    holder.tv_content.setText("分享奖励");
+//                    holder.tv_content.setText("分享奖励");
 //                    holder.tv_num.setText("+"+ MyUtils.Intercept_Int_Point(MyUtils.Str2Double(mdata.getMoney())*0.01+""));
                     holder.tv_num.setText("+"+MyUtils.mul(Double.valueOf(mdata.getMoney()),0.01));
                     break;

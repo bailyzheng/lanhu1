@@ -130,6 +130,27 @@ public class Main2Activity extends BaseActivity implements View.OnClickListener 
                         MyUtils.Loge(TAG, "缓存中的电话号码：" + MySharedPrefrencesUtil.getParam(ma, "phone_data", ""));
                     }
                     MyUtils.showToast(ma, "添加成功");
+                    DialogOkUtil.show_OK_NO_Dialog(ma, "加粉成功,请打开微信,稍等片刻,等待新的好友出现后,返回蓝狐继续加粉.", new DialogOkUtil.On_OK_N0_ClickListener() {
+                        @Override
+                        public void onOk() {
+                            try {
+                                Intent intent = new Intent(Intent.ACTION_MAIN);
+                                ComponentName cmp = new ComponentName("com.tencent.mm", "com.tencent.mm.ui.LauncherUI");
+                                intent.addCategory(Intent.CATEGORY_LAUNCHER);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                intent.setComponent(cmp);
+                                ma.startActivity(intent);
+                            } catch (Exception e) {
+                                // TODO: handle exception
+                                MyUtils.showToast(ma, "检查到您手机没有安装微信，请安装后使用该功能");
+                            }
+                        }
+
+                        @Override
+                        public void onNo() {
+                        }
+                    }, "邀请好友,送三天被加,送置顶").show();
+
                     break;
                 case 2:
                     //添加通讯录拒绝权限回调
