@@ -15,8 +15,8 @@ android {
         applicationId "com.zys.jym.lanhu"
         minSdkVersion 14
         targetSdkVersion 25
-        versionCode 13
-        versionName "2.5"
+        versionCode 14
+        versionName "2.6"
         multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         signingConfig signingConfigs.key
@@ -33,7 +33,7 @@ android {
     buildTypes {
         debug {
             signingConfig signingConfigs.key
-            debuggable false
+            debuggable true
             jniDebuggable false
             renderscriptDebuggable false
             minifyEnabled false
@@ -49,7 +49,7 @@ android {
             signingConfig signingConfigs.key
             //混淆配置
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            debuggable true
+            debuggable false
             jniDebuggable false
             renderscriptDebuggable false
         }

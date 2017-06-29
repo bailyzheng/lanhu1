@@ -1,4 +1,5 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingTranslation" >
     <string name="app_name">蓝狐微商</string>
     <string name="login_username_hint">请输入手机号</string>
     <string name="login_pwd_hint">请输入密码</string>
