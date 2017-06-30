@@ -693,6 +693,7 @@ public class Main2Activity extends BaseActivity implements View.OnClickListener 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        MyUtils.Loge("qqqq","Main2Activity");
         if (data != null) {
             MyUtils.Loge(TAG, "data.getData():" + data.getData());
             mFragments.get(2).onActivityResult(requestCode, resultCode, data);

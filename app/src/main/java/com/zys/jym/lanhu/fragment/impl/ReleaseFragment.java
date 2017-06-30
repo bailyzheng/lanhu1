@@ -4,8 +4,11 @@ import android.Manifest;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.content.ContextCompat;
@@ -52,10 +55,13 @@ import com.zys.jym.lanhu.httpcallback.FabuSuccessCallback;
 import com.zys.jym.lanhu.httpcallback.UpEWMCallback;
 import com.zys.jym.lanhu.httpcallback.UpHeadImgCallback;
 import com.zys.jym.lanhu.utils.ActivityUtil;
+import com.zys.jym.lanhu.utils.FileUtils;
+import com.zys.jym.lanhu.utils.ImageUtils;
 import com.zys.jym.lanhu.utils.LHHttpUrl;
 import com.zys.jym.lanhu.utils.MediaUtil;
 import com.zys.jym.lanhu.utils.MySharedPrefrencesUtil;
 import com.zys.jym.lanhu.utils.MyUtils;
+import com.zys.jym.lanhu.utils.PictureMenu;
 import com.zys.jym.lanhu.utils.RequestCode;
 import com.zys.jym.lanhu.utils.SPrefUtil;
 
@@ -86,6 +92,7 @@ public class ReleaseFragment extends BaseFragment implements View.OnClickListene
     static String c = "", c_id = "";
     String title;
     String miaoshu;
+    private PictureMenu mPhotoMenu;
     public static Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -160,6 +167,7 @@ public class ReleaseFragment extends BaseFragment implements View.OnClickListene
     public View initView() {
         MyUtils.Loge(TAG, "ReleaseFragment--initView");
         View view = View.inflate(getActivity(), R.layout.fragment_release, null);
+        mPhotoMenu = new PictureMenu();//初始化
         ll_release_fl = (LinearLayout) view.findViewById(R.id.ll_release_fl);
         rg_releae = (RadioGroup) view.findViewById(R.id.rg_releae);
         rb_rpersonalcard = (RadioButton) view.findViewById(R.id.rb_rpersonalcard);
@@ -240,7 +248,7 @@ public class ReleaseFragment extends BaseFragment implements View.OnClickListene
         switch (view.getId()) {
             case R.id.iv_erweima:
                 // 从相册中去获取
-                MyUtils.Loge(TAG, "进入上传图像的按钮");
+/*                MyUtils.Loge(TAG, "进入上传图像的按钮");
                 if (ContextCompat.checkSelfPermission(mActivity,
                         Manifest.permission.WRITE_EXTERNAL_STORAGE)
                         != PackageManager.PERMISSION_GRANTED) {
@@ -248,7 +256,9 @@ public class ReleaseFragment extends BaseFragment implements View.OnClickListene
                             0x13, Manifest.permission.WRITE_EXTERNAL_STORAGE);
                 } else {
                     MediaUtil.doPickPhotoFromGallery(mActivity);
-                }
+                }*/
+
+                mPhotoMenu.show(getActivity().getSupportFragmentManager(), "Main2Activity");
                 break;
             case R.id.personal_address_tv:
                 Intent in = new Intent(mActivity, SelectP2Activity.class);
@@ -590,7 +600,8 @@ public class ReleaseFragment extends BaseFragment implements View.OnClickListene
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 //        super.onActivityResult(requestCode, resultCode, data);
-        if (data != null) {
+        MyUtils.Loge("qqqq","ReleaseFragment");
+       /* if (data != null) {
             switch (requestCode) {
                 case MediaUtil.SELECT_PHOTO_CODE:// 相册
                 case MediaUtil.CAMERA_REQUEST_CODE:// 相机
@@ -623,6 +634,40 @@ public class ReleaseFragment extends BaseFragment implements View.OnClickListene
 //                    }
                     break;
             }
+        }*/
+        switch (requestCode) {
+            case PictureMenu.REQUEST_CODE_CAMERA:
+                MyUtils.Loge("mm","进入照相");
+                File currentPhotoPath = mPhotoMenu.mTakePhotoFile;
+                if (currentPhotoPath.exists()) {
+                    mPhotoMenu.cropPictures(getActivity(), Uri.fromFile(currentPhotoPath), "auth");
+                }
+                mPhotoMenu.dismissDialog();
+                break;
+            case PictureMenu.REQUEST_CODE_CROP:// 裁剪
+                if (mPhotoMenu.mCropPhotoFile.exists()) {
+                    byte[] datas = FileUtils.getByteArrayFromSD(mPhotoMenu.mCropPhotoFile.getAbsolutePath());
+                    Bitmap bitmap = BitmapFactory.decodeFile(mPhotoMenu.mCropPhotoFile.getAbsolutePath());
+//                    iv_header.setImageBitmap(bitmap);
+//                    ImageLoaderUtil.displayImageCircleCache(ImageDownloader.Scheme.FILE.wrap(mPhotoMenu.mCropPhotoFile.getAbsolutePath()), iv_header, R.mipmap.md_header);
+//
+//                    updatePhoto(mPhotoMenu.mCropPhotoFile);
+                    MyUtils.Loge("mm","进入裁剪");
+//                    uri = Uri.fromFile(mPhotoMenu.mCropPhotoFile);
+
+                }
+                break;
+
+            case PictureMenu.REQUEST_CODE_GALLERY:// 从相册选择
+                MyUtils.Loge("mm","进入相册");
+                if (data != null) {
+                    Uri currentImgUri = data.getData();
+                    String currentImgPath = ImageUtils.getImagePath(getActivity(), currentImgUri);
+                    mPhotoMenu.cropPictures(getActivity(), Uri.fromFile(new File(currentImgPath)), "avatar");
+                }
+                mPhotoMenu.dismissDialog();
+                break;
+
         }
     }
 
