@@ -6,6 +6,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.ContentResolver;
 import android.content.ContentUris;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -26,6 +27,7 @@ import android.provider.MediaStore.Images.ImageColumns;
 import android.provider.MediaStore.MediaColumns;
 import android.support.v4.content.ContextCompat;
 import android.util.Base64;
+import android.util.Log;
 import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -45,6 +47,8 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import pub.devrel.easypermissions.EasyPermissions;
+
+import static android.support.v4.content.FileProvider.getUriForFile;
 
 public class MediaUtil {
     static String TAG = "TAG--BitmapUtil";
@@ -720,7 +724,11 @@ public class MediaUtil {
             if (data.getData() != null) {
                 uri = data.getData();
             } else {
-                uri = Uri.fromFile(getCameraPath(data)); // 拍照返回数据
+//                uri = Uri.fromFile(getCameraPath(dgetContentUriFromFileata)); // 拍照返回数据
+//                Uri curi = getUriForFile(context,
+//                 "com.zys.jym.lanhu.fileprovider", getCameraPath(data));
+
+                uri = getContentUriFromFile(context, getCameraPath(data));
             }
             intent.setDataAndType(uri, "image/*");
             intent.putExtra("crop", true);
@@ -728,10 +736,37 @@ public class MediaUtil {
             intent.putExtra("aspectY", 1);
             intent.putExtra("outputX", cut_w != 0 ? cut_w : INIT_WIDTH);
             intent.putExtra("outputY", cut_h != 0 ? cut_h : INIT_HEIGHT);
+            Log.i("stones", "startActivityForResult");
             context.startActivityForResult(intent, PHOTO_CROP);
         } catch (Exception e) {
             Toast.makeText(context, "没有找到图片", Toast.LENGTH_LONG).show();
+            e.printStackTrace();
 
+        }
+    }
+
+    public static Uri getContentUriFromFile(Context context, File imageFile) {
+
+        String filePath = imageFile.getAbsolutePath();
+
+        Cursor cursor = context.getContentResolver().query(
+                MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+                new String[]{MediaStore.Images.Media._ID},
+                MediaStore.Images.Media.DATA + "=? ",
+                new String[]{filePath}, null);
+
+        if (cursor != null && cursor.moveToFirst()) {
+            int id = cursor.getInt(cursor.getColumnIndex(MediaStore.MediaColumns._ID));
+            Uri baseUri = Uri.parse("content://media/external/images/media");
+            return Uri.withAppendedPath(baseUri, "" + id);
+        } else {
+            if (imageFile.exists()) {
+                ContentValues values = new ContentValues();
+                values.put(MediaStore.Images.Media.DATA, filePath);
+                return context.getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
+            } else {
+                return null;
+            }
         }
     }
 
